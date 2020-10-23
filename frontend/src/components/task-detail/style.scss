@@ -1,0 +1,162 @@
+// new
+@import "../../sass/main.scss";
+
+@include xs-monkeys {
+  .task-detail-one {
+    width: 100%;
+    min-height: 58vh;
+  }
+  .task-detail-two {
+    margin-top: 10px;
+    width: 100%;
+    min-height: 58vh;
+  }
+  .task-detail-container {
+    flex-direction: column;
+  }
+}
+
+@include sm-monkeys {
+  .task-detail-one {
+    width: 54%;
+    min-height: 58vh;
+  }
+  .task-detail-two {
+    min-height: 58vh;
+    width: 40%;
+  }
+}
+
+@include md-monkeys {
+  .task-detail-one {
+    width: 67%;
+    min-height: 58vh;
+  }
+  .task-detail-two {
+    min-height: 58vh;
+    width: 30%;
+  }
+}
+
+@include lg-monkeys {
+  .task-detail-one {
+    width: 67%;
+    min-height: 58vh;
+  }
+  .task-detail-two {
+    min-height: 58vh;
+    width: 30%;
+  }
+}
+
+@include xl-monkeys {
+  .task-detail-one {
+    width: 77%;
+    min-height: 58vh;
+  }
+  .task-detail-two {
+    min-height: 58vh;
+    width: 20%;
+  }
+}
+
+.task-tag {
+  margin-right: 52px;
+  width: 52px;
+  height: 14px;
+  font-family: Rubik;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.task-tag-bolder {
+  width: 52px;
+  height: 14px;
+  font-family: Rubik;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #15225a;
+}
+
+.task-name {
+  width: 207px;
+  height: 32px;
+  font-family: Rubik;
+  font-size: 28px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  color: #2e384d;
+}
+
+.task-description {
+  width: 170px;
+  height: 19px;
+  font-family: Rubik;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.task-assets {
+  width: 37px;
+  height: 14px;
+  font-family: Rubik;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.task-detail-two-header {
+  width: 54px;
+  height: 14px;
+  font-family: Rubik;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.task-detail-username {
+  width: 127px;
+  height: 14px;
+  font-family: Rubik;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+
+.task-detail-button{
+  position: relative;
+  width: 155px;
+  height: 40px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: none;
+}
+
+.task-detail-button-op{
+  opacity: 0.2;
+}

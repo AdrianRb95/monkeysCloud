@@ -1,0 +1,60 @@
+@import '../../sass/main.scss';
+
+.detail-enviroment-page {
+  height: 100%;
+  width: 100%;
+  .project-action-buttons > button {
+    @include md {
+      width: 100%;
+    }
+  }
+}
+
+.enviroment-table-container {
+  margin-top: 40px;
+  padding-bottom: 250px;
+  @include sm {
+    display: none;
+  }
+  table {
+    width: 99%;
+    border-collapse: collapse;
+  }
+  thead {
+    background-color: #ccd6fc;
+    th {
+      padding: 13px 29px;
+      text-align: left;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #15225a;
+    }
+  }
+  tbody {
+    td {
+      padding: 13px 29px;
+      border-bottom: solid 1px #cbd5fc;
+      font-size: 12px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #15225a;
+      background: #ffffff;
+      p {
+        display: flex;
+        align-items: center;
+      }
+      .table-icon {
+        font-size: 16px;
+        margin-right: 10px;
+      }
+    }
+  }
+}

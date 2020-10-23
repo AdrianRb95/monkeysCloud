@@ -1,0 +1,102 @@
+@import '../../sass/main.scss';
+
+.Top-Bar {
+  /*     width: 100vw; */
+  height: 80px;
+  background-color: #ffffff;
+}
+
+.Logo {
+  width: 146px;
+  height: 40px;
+  margin: 25px 0px 20px 193px;
+  position: absolute;
+}
+
+.Parte-1 {
+  width: 11px;
+  height: 12px;
+  color: $Midnightblue-color;
+}
+
+.Parte-2 {
+  width: 10px;
+  height: 13px;
+  color: $Brandeisblue-color;
+}
+
+.notification {
+  width: 18px;
+  height: 21px;
+  margin-left: 21px;
+  color: #bfc5d2;
+}
+
+.Settings {
+  width: 20px;
+  height: 20px;
+  margin-left: 21px;
+  color: #bfc5d2;
+}
+
+.zoom {
+  width: 21px;
+  height: 21px;
+  margin-left: 21px;
+  color: #bfc5d2;
+}
+
+.Oval {
+  width: 40px;
+  height: 40px;
+  float: right;
+  border-radius: 50%;
+  background-color: $Midnightblue-color;
+  margin-left: 39px;
+}
+
+.Online-Status {
+  width: 12px;
+  height: 11px;
+  border: solid 2px #ffffff;
+  border-radius: 50%;
+  left: 30px;
+  background-color: $Brandeisblue-color;
+  float: right;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  margin: 20px 116px 0px 0px;
+  float: right;
+  position: relative;
+}
+
+ul {
+  li {
+    list-style: none;
+    margin-top: 10px;
+  }
+}
+
+//para el responsive
+@media only screen and (max-width: 500px) {
+  ul {
+    flex-direction: row;
+    margin-top: 50px;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: block;
+  }
+
+  .Logo {
+    margin-left: 140px;
+  }
+}

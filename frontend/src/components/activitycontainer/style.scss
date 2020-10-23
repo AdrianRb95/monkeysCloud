@@ -1,0 +1,60 @@
+@import '../../sass/main.scss';
+
+.enviroment-activity-container {
+  width: 100%;
+  min-height: 280px;
+  border-radius: 1px;
+  border: solid 1px rgba(46, 91, 255, 0.08);
+  background-color: #ffffff;
+  margin-top: 36px;
+  padding: 32px 24px;
+  padding-bottom: 50px;
+  @include md {
+    width: 100%;
+    margin: 36px auto;
+    padding-bottom: 20px;
+  }
+  @include sm {
+    padding: 10px;
+    min-height: 0;
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+}
+
+.enviroment-activity-header {
+  @include sm {
+    display: flex;
+    justify-content: space-between;
+    background: #ffffff;
+    padding: 5px 10px;
+  }
+}
+
+.enviroment-activity-title {
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1.21px;
+  color: #8798ad;
+  text-transform: uppercase;
+  @include md {
+    text-align: center;
+  }
+}
+
+.enviroment-card-container {
+  margin-top: 28px;
+  display: flex;
+  flex-flow: wrap;
+  @include md {
+    justify-content: center;
+  }
+  @include sm {
+    display: none;
+    margin-top: 3px;
+    margin-bottom: 5px;
+  }
+}

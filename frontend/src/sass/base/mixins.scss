@@ -1,0 +1,58 @@
+$ipad: 1024px;
+$tablet: 768px;
+$mobile: 450px;
+
+@mixin lg {
+  @media (max-width:#{$ipad}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width:#{$tablet}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (max-width:#{$mobile}) {
+    @content;
+  }
+}
+
+// CORRECT BREAKPOINT
+
+// Extra small devices (portrait phones, less than 576px)
+@mixin xs-monkeys {
+  @media (max-width: 575.98px) {
+    @content;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@mixin sm-monkeys {
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    @content;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@mixin md-monkeys {
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    @content;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@mixin lg-monkeys {
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    @content;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@mixin xl-monkeys {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}

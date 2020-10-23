@@ -1,0 +1,32 @@
+@import '../../sass//main.scss';
+.avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-icon-container {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  margin-left: 20px;
+}
+
+.avatar-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  background: $Midnightblue-color;
+}
+
+.avatar-status {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  height: 12px;
+  width: 12px;
+  border: 1px solid white;
+  background-color: $Brandeisblue-color;
+  border-radius: 50%;
+}

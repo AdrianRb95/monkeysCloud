@@ -1,0 +1,3 @@
+export default {
+  SET_ORGANIZATION_VAL: "SET_ORGANIZATION_VAL",
+};

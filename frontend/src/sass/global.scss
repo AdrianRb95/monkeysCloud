@@ -1,0 +1,282 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Rubik;
+}
+
+.container {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.main-content {
+  min-height: 100%;
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  grid-template-rows: 80px 1fr;
+  grid-template-areas:
+    'sidebar navbar'
+    'sidebar app';
+}
+
+.app {
+  grid-area: app;
+  background: #f4f6fc;
+  min-height: calc(100vh - 80px);
+  min-width: calc(100vw - 80px);
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 0.94;
+  letter-spacing: normal;
+  margin: 10px 0;
+}
+
+.subtitle {
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.47;
+  letter-spacing: normal;
+  color: $gray;
+}
+
+.font-gray {
+  color: $secondary-gray;
+}
+
+form {
+  margin: 10px 0;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-stretch {
+  align-items: stretch;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+.justify-content-start {
+  justify-content: flex-start;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.font-weight-bolder {
+  font-weight: bolder;
+}
+
+.user-select-none {
+  user-select: none;
+}
+.project-header {
+  display: flex;
+  align-items: center;
+  flex-flow: wrap;
+  .project-type {
+    padding: 0 15px;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #606972;
+    border-radius: 11px;
+    border: solid 1px #e4e8f0;
+    background-color: #ffffff;
+  }
+}
+
+.project-name {
+  padding-right: 15px;
+  p {
+    color: $Brandeisblue-color;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2;
+    letter-spacing: normal;
+    span {
+      color: $Midnightblue-color;
+    }
+    strong {
+      font-weight: bold;
+    }
+  }
+  @include sm {
+    margin-bottom: 10px;
+  }
+}
+
+.project-enviroment-buttons {
+  flex: 1;
+  min-width: 271px;
+  display: flex;
+  justify-content: flex-end;
+  @include md {
+    margin-top: 10px;
+    justify-content: flex-start;
+  }
+}
+
+.env-button {
+  padding: 5px 20px;
+  line-height: 1.75;
+  color: #b6c5ff;
+  border: solid 2px #cad6ff;
+  outline-width: 0;
+  font-stretch: normal;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.env-active {
+  color: #2855ff;
+  background-color: #ccd6fc;
+}
+
+.project-filter-button {
+  background-color: transparent;
+  border: none;
+  color: $Midnightblue-color;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  margin-right: 30px;
+  line-height: normal;
+  letter-spacing: normal;
+  outline-width: 0;
+  text-align: center;
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.filter-active {
+  color: $Flame-color !important;
+}
+
+.project-action-buttons {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  button + button {
+    margin-left: 10px;
+  }
+  @include sm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    button + button {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+}
+
+.project-action-buttons > button {
+  border-radius: 4px;
+  background-color: #8798ad;
+  border: none;
+  color: #ffffff;
+  font-stretch: normal;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+  height: 40px;
+  outline-width: 0;
+  letter-spacing: normal;
+  line-height: 1.4;
+  text-align: center;
+  width: 140px;
+  &:hover {
+    opacity: 0.6;
+  }
+  @include sm {
+    width: 100%;
+  }
+}
+
+.action-button-special {
+  background-color: $secondary-blue !important;
+}
+
+.accordion-icon-container {
+  display: none;
+  @include sm {
+    display: flex;
+  }
+  .accordion-icon {
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+}
+
+.show-tasks {
+  display: block !important;
+}

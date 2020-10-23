@@ -1,0 +1,115 @@
+$spacer: 1rem;
+
+$spacers: (
+  0: 0,
+  1: (
+    $spacer * 0.25,
+  ),
+  2: (
+    $spacer * 0.5,
+  ),
+  3: $spacer,
+  4: (
+    $spacer * 1.5,
+  ),
+  5: (
+    $spacer * 3,
+  ),
+);
+
+// Margin builder
+@mixin m-builder($point, $sp) {
+  // Example monkeys-m-1
+  .monkeys-m-#{$point} {
+    margin: $sp;
+  }
+
+  // Example monkeys-ml-1
+  .monkeys-ml-#{$point} {
+    margin-left: $sp;
+  }
+
+  // Example monkeys-mr-1
+  .monkeys-mr-#{$point} {
+    margin-right: $sp;
+  }
+
+  // Example monkeys-mt-1
+  .monkeys-mt-#{$point} {
+    margin-top: $sp;
+  }
+
+  // Example monkeys-mb-1
+  .monkeys-mb-#{$point} {
+    margin-top: $sp;
+  }
+
+  // Example monkeys-mx-1
+  .monkeys-mx-#{$point} {
+    margin-left: $sp;
+    margin-right: $sp;
+  }
+
+  // Example monkeys-my-1
+  .monkeys-my-#{$point} {
+    margin-top: $sp;
+    margin-bottom: $sp;
+  }
+}
+
+// Padding builder
+@mixin p-builder($point, $sp) {
+  // Example monkeys-p-1
+  .monkeys-p-#{$point} {
+    padding: $sp;
+  }
+
+  // Example monkeys-pl-1
+  .monkeys-pl-#{$point} {
+    padding-left: $sp;
+  }
+
+  // Example monkeys-pr-1
+  .monkeys-pr-#{$point} {
+    padding-right: $sp;
+  }
+
+  // Example monkeys-pt-1
+  .monkeys-pt-#{$point} {
+    padding-top: $sp;
+  }
+
+  // Example monkeys-pb-1
+  .monkeys-pb-#{$point} {
+    padding-top: $sp;
+  }
+
+  // Example monkeys-px-1
+  .monkeys-px-#{$point} {
+    padding-left: $sp;
+    padding-right: $sp;
+  }
+
+  // Example monkeys-py-1
+  .monkeys-py-#{$point} {
+    padding-top: $sp;
+    padding-bottom: $sp;
+  }
+}
+
+// Font Size builder
+@mixin f-builder($point, $sp) {
+  // Example monkeys-f-1
+  .monkeys-f-#{$point} {
+    font-size: $sp;
+  }
+}
+
+
+
+
+@each $point, $sp in $spacers {
+  @include m-builder($point, $sp);
+  @include p-builder($point, $sp);
+  @include f-builder($point, $sp);
+}

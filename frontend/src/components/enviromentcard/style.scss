@@ -1,0 +1,40 @@
+@import '../../sass/main.scss';
+
+.enviroment-card {
+  width: 258px;
+  height: 156px;
+  border-radius: 5px;
+  border: solid 2px rgba(46, 91, 255, 0.08);
+  padding: 35px 31px;
+  margin-right: 10px;
+  @include lg {
+    margin-bottom: 15px;
+    margin-right: 5px;
+  }
+  @include sm {
+    margin-right: 0;
+    width: 150px;
+  }
+}
+
+.github-title {
+  font-size: 15px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.47;
+  letter-spacing: normal;
+  color: #2e384d;
+  margin-bottom: 2px;
+}
+
+.github-data-history {
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.47;
+  letter-spacing: normal;
+  color: #8798ad;
+  margin-bottom: 2px;
+}

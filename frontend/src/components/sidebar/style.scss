@@ -1,0 +1,46 @@
+@import '../../sass/main.scss';
+
+.monkeys-sidebar {
+  min-height: 100vh;
+  top: 0;
+  width: 80px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  grid-area: sidebar;
+  background: white;
+}
+
+.monkeys-sidebar-expanded {
+  min-height: 100vh;
+  top: 0;
+  width: 216px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  grid-area: sidebar;
+  background: white;
+}
+
+.monkeys-menu-icon {
+  transform: rotateX(180deg) rotateY(0deg) rotateZ(90deg);
+  font-size: 30px;
+}
+
+.monkeys-menu-icon-container {
+  margin-top: 16px;
+  margin-left: 22px;
+}
+
+.monkeys-menu-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.monkeys-sidebar-avatar-img {
+  height: 32px;
+  width: 32px;
+  background: $Egyptianblue-color;
+  border-radius: 8px;
+}

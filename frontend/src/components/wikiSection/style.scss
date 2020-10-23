@@ -1,0 +1,91 @@
+@import "../../sass/main.scss";
+
+.wikiContainer {        
+    display: block;      
+    width: 75%;
+    margin: auto;
+}
+
+.titleHeader {    
+    height: 32px;
+    font-family: Rubik;
+    font-size: 28px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    color: #15225a;   
+    margin-bottom: 30px;
+}
+
+.input-block {
+    display: block;
+    width: 100%;
+    border-radius: 6px;   
+  	border: solid 1.5px #D3D3D3;  
+    transition: 0s;
+}
+
+.titlebox {             
+    padding: 5px 12px;    
+    font-size: 14px;
+    line-height: 20px;        
+    font-weight: 500;      	
+}
+
+.input-block:focus{
+    box-shadow: 0 0 2pt 2pt rgb(31, 118, 189);
+  	outline-width: 0px;
+}
+
+.mediaBar{
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+    border-radius: 6px;   
+  	border: solid 1.5px #D3D3D3;  
+}
+
+.messageBox {
+    overflow: auto;
+    border-radius: 6px;
+    margin: 25px 0px 25px 0px;
+}
+
+.smallTitle {
+    margin-bottom: 8px!important;
+    display: block!important;
+    font-weight: 600;
+    color: #15225a;
+}
+
+.smallMessage {        
+    font-weight: 100;              
+    padding: 5px 12px;    
+    font-size: 14px;
+    line-height: 20px;        
+}
+
+.btnSave {
+    position: relative;
+    margin-top: 20px;
+    background-color: #0366d6;
+    border-radius: 6px;
+    color: white;
+    border: 1px solid;
+    padding: 5px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    float: right;
+}
+
+.editor {
+    margin: 25px 0px 25px 0px;
+}
+
+

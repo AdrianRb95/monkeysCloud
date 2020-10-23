@@ -1,0 +1,41 @@
+@import '../../sass/main.scss';
+
+.logo-partone {
+  color: $Midnightblue-color;
+  font-weight: bolder;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.logo-parttwo {
+  color: $Brandeisblue-color;
+  font-weight: bolder;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.monkeys-nav {
+  grid-area: navbar;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.navbar-icons {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .nav-icon {
+    color: #bfc5d2;
+    font-size: 22px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+}
