@@ -1,0 +1,22 @@
+@import '../../../sass/main.scss';
+
+.taks-detail-comment {
+  margin-bottom: 15px;
+  display: flex;
+}
+
+.comment-info {
+  margin-left: 15px;
+  span {
+    margin-left: 15px;
+    opacity: 0.5;
+  }
+  p {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+}
+
+.comment-options {
+  margin-top: 5px;
+}
