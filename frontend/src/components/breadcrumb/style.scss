@@ -1,4 +1,4 @@
-@import "../../sass/main.scss";
+@import '../../sass/main.scss';
 
 .breadcrumb-button {
   border-radius: 8px;
@@ -30,32 +30,36 @@
   }
 }
 
-.monkeys-list-item{
+.breadcrumb-text-firts {
+  padding-left: 0;
+}
+
+.monkeys-list-item {
+  padding: 10px;
+  &.active {
+    background: $secondary-light;
+    font-weight: bolder;
+  }
+}
+
+.monkeys-card {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  .monkeys-card-header {
     padding: 10px;
-    &.active{
-        background: $secondary-light;
-        font-weight: bolder;
-    }
+    border: 0.5px solid $gray;
+  }
+  .monkeys-card-body {
+    list-style: none;
+    height: 150px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 0.5px solid $gray;
+  }
 }
 
-.monkeys-card{
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    .monkeys-card-header{
-        padding: 10px;
-        border: .5px solid $gray;
-    }
-    .monkeys-card-body{
-        list-style: none;
-        height: 150px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        border: .5px solid $gray;
-    }
-}
-
-.monkeys-info-icon{
-    color: $secondary-blue;
-    font-size: 21px;
+.monkeys-info-icon {
+  color: $secondary-blue;
+  font-size: 21px;
 }

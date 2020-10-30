@@ -3,10 +3,12 @@
 .monkeys-sidebar {
   min-height: 100vh;
   top: 0;
+  left: 0;
   width: 80px;
   position: fixed;
   display: flex;
   flex-direction: column;
+  /*   background: white; */
   grid-area: sidebar;
   background: white;
 }

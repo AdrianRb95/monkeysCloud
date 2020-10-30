@@ -1,5 +1,5 @@
 // new
-@import "../../sass/main.scss";
+@import '../../sass/main.scss';
 
 @include xs-monkeys {
   .task-detail-one {
@@ -60,13 +60,15 @@
   }
 }
 
+.task-detail-header-buttons {
+  margin: 25px 0;
+}
+
 .task-tag {
   margin-right: 52px;
-  width: 52px;
   height: 14px;
-  font-family: Rubik;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: bolder;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
@@ -83,15 +85,12 @@
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #15225a;
+  color: $Midnightblue-color;
 }
 
 .task-name {
-  width: 207px;
-  height: 32px;
-  font-family: Rubik;
   font-size: 28px;
-  font-weight: 300;
+  font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.14;
@@ -100,15 +99,27 @@
 }
 
 .task-description {
-  width: 170px;
   height: 19px;
   font-family: Rubik;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: bolder;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
+  color: $Midnightblue-color;
+  margin-bottom: 10px;
+}
+
+.task-detail-description {
+  font-size: 14px;
+  line-height: 190%;
+  color: $Midnightblue-color;
+}
+
+.share-icon {
+  font-size: 25px;
+  margin-right: 10px;
 }
 
 .task-assets {
@@ -147,16 +158,133 @@
   letter-spacing: normal;
 }
 
-
-.task-detail-button{
+.task-detail-button {
   position: relative;
   width: 155px;
   height: 40px;
   border-radius: 4px;
   overflow: hidden;
   border: none;
+  @include sm {
+    margin-top: 10px;
+  }
 }
 
-.task-detail-button-op{
+.task-detail-button-op {
   opacity: 0.2;
+}
+
+.task-detail-priority {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.task-detail-activity {
+  margin: 20px 0;
+  h4 {
+    color: $Midnightblue-color;
+  }
+}
+
+.task-detail-activity-buttons > p {
+  font-size: 14px;
+  margin-top: 15px;
+  margin-bottom: 35px;
+  @include sm {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.activity-filter {
+  font-weight: 400;
+  margin-left: 5px;
+  padding: 5px 8px;
+  text-transform: capitalize !important;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.activity-filter-active {
+  background: #505f79;
+  color: white;
+}
+
+.task-detail-add-comment {
+  display: flex;
+}
+
+.new-comment {
+  margin-left: 10px;
+  width: 90%;
+  z-index: 0;
+}
+
+.task-details {
+  margin: 20px 0;
+}
+
+.task-detail-property {
+  margin: 30px 0;
+  display: flex;
+  flex-wrap: wrap;
+  h5 {
+    width: 45%;
+  }
+  span {
+    font-size: 14px;
+    font-weight: 400;
+    flex: 1;
+  }
+}
+
+.detail-tracking {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  .tracking-time {
+    flex: 1;
+  }
+  hr {
+    height: 6px;
+    background: gray;
+    border-radius: 5px;
+  }
+}
+
+.tracking-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.watch-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.editable-buttons {
+  border: none;
+  padding-right: 10px;
+  opacity: 0.8;
+  outline-width: 0;
+  background: none;
+}
+
+.task-create-branch {
+  padding: 8px 15px;
+  border-radius: 5px;
+  border: none;
+  background: $Midnightblue-color;
+  color: white;
+  display: flex;
+  align-items: center;
+  outline-width: 0;
+}
+
+.task-detail-main-header {
+  @include sm {
+    flex-direction: column;
+  }
 }

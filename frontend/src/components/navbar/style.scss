@@ -18,24 +18,165 @@
   letter-spacing: normal;
 }
 
+.logo-container {
+  @include md {
+    flex: 1;
+  }
+}
+
 .monkeys-nav {
   grid-area: navbar;
   padding: 0 3rem;
   display: flex;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
+  @include md {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 3rem;
+  }
 }
 
 .navbar-icons {
-  flex: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
   .nav-icon {
     color: #bfc5d2;
     font-size: 22px;
     margin: 0 10px;
     cursor: pointer;
+    &:last-of-type {
+      margin-right: 20px;
+    }
   }
+}
+
+.searchContainer {
+  flex: 1;
+  margin: 0 10px 0 30px;
+  position: relative;
+  .nav-form {
+    .nav-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid $Lightslategray-rgba;
+      outline-width: 0;
+      padding: 5px;
+      color: $Lightslategray-rgba;
+    }
+  }
+  @include md {
+    margin: 10px 0;
+    width: 100%;
+  }
+  @include sm {
+    position: static;
+  }
+}
+
+.nav-search {
+  border-radius: 5px;
+  z-index: 10000;
+  top: 30px;
+  position: absolute;
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 5px 5px 10px #888888;
+  @include sm {
+    top: 70px;
+    opacity: 1;
+  }
+}
+
+.search-container {
+  display: flex;
+  padding: 25px 20px;
+  height: 100%;
+  @include md {
+    flex-direction: column;
+  }
+}
+
+.search-issues {
+  width: 65%;
+  @include md {
+    width: 100%;
+  }
+}
+
+.search-section-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.search-badge {
+  padding: 0 5px;
+  background: #babdc5;
+  border-radius: 5px;
+  margin-left: 15px;
+}
+
+.nav-boards {
+  margin-top: 15px;
+}
+
+.search-filter {
+  border-left: 1px solid gray;
+  margin-left: 10px;
+  padding: 0 20px;
+  flex: 1;
+  @include md {
+    margin-left: 0;
+    padding: 0;
+    border-left: none;
+  }
+}
+
+.projects-filters {
+  margin-bottom: 15px;
+}
+
+.filter-project {
+  display: flex;
+  .filter-checkbox {
+    padding-top: 7px;
+    margin-right: 12px;
+    input[type='checkbox'] {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.search-footer {
+  padding: 10px 20px;
+  border-top: 1px solid $gray;
+  display: inline-table;
+  align-items: center;
+  h5 {
+    margin-right: 10px;
+    font-size: 15px;
+    display: inline-flex;
+  }
+}
+
+a.nav-filter-button {
+  padding: 5px 10px;
+  text-transform: capitalize;
+  font-weight: 600;
+  margin: 5px 10px 5px 0;
+  background: #c1c3c8;
+  border-radius: 5px;
+  font-size: 13px;
+  color: $Egyptianblue-color;
+  display: inline-flex;
+}
+
+.nav-show-more {
+  color: $Egyptianblue-color;
 }
