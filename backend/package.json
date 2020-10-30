@@ -1,7 +1,7 @@
 {
     "name": "monkeycloud",
     "private": true,
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "A git workflow application for self-hosted git repositories",
     "keywords": [],
     "dependencies": {
