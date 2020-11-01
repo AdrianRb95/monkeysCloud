@@ -74,7 +74,7 @@ services:
       MYSQL_USER: sails
       MYSQL_PASSWORD: sailsPowdj940
     volumes:
-      - ./data/mysql:/var/lib/mysql
+      - ./data/db/mysql:/var/lib/mysql
     networks:
       - backend
 
