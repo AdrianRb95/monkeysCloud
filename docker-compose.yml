@@ -74,12 +74,12 @@ services:
       MYSQL_USER: sails
       MYSQL_PASSWORD: sailsPowdj940
     volumes:
-      - ./data/db/mysql:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
     networks:
       - backend
 
   elasticsearch:
-    image: elasticsearch:7.9.2
+    image: elasticsearch:7.9.3
     restart: always
     container_name: "elasticsearch"
     environment:
