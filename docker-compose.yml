@@ -4,41 +4,37 @@ services:
   traefik:
     image: "traefik:v2.3"
     container_name: "traefik"
-    restart: always
+    restart: unless-stopped
     command:
       - "--log.level=DEBUG"
       - "--api.insecure=true"
       - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.exposedbydefault=true"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
     ports:
       - "80:80"
       - "8080:8080"
+      - "443:443"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.rule=Host(`traefik.localhost`)
+      - traefik.http.routers.traefik.entrypoints=web
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`traefik.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
-
-  whoami:
-    image: "traefik/whoami"
-    container_name: "whoami"
-    restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`whoami-monkeys.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+      - "$PWD/traefik.toml:/etc/traefik/traefik.toml"
+    networks:
+      - traefik
+      - backend
 
   webapp:
-    restart: always
+    restart: unless-stopped
+    container_name: "webapp"
     stdin_open: true
     tty: true
     build:
       context: ./frontend
-      dockerfile: Dockerfile.frontend
-    ports:
-      - "3001:3000"
+      dockerfile: ../Dockerfile.frontend
     volumes:
       - './frontend:/app'
       - '/app/node_modules'
@@ -46,41 +42,52 @@ services:
       - CHOKIDAR_USEPOLLING=true
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`monkeys.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.webapp.rule=Host(`monkeys.localhost`)"
+      - "traefik.http.routers.webapp.entrypoints=web"
+      - "traefik.http.services.webapp.loadbalancer.server.port=3000"
 
   sailsjs:
     container_name: "sailsjs"
-    restart: always
+    restart: unless-stopped
     build:
-      dockerfile: Dockerfile.backend
-      context: .
+      context: ./backend
+      dockerfile: ../Dockerfile.backend
     volumes:
       - ./backend:/usr/src/app
     networks:
       - backend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`backend-monkeys.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.http.routers.sailsjs.rule=Host(`backend-monkeys.localhost`)"
+      - "traefik.http.services.sailsjs.loadbalancer.server.port=1337"
+    depends_on:
+      - "mysql"
+
+  whoami:
+    image: containous/whoami
+    container_name: "whoami"
+    command:
+      # It tells whoami to start listening on 8082 instead of 80
+      - --port=8082
+    labels:
+      - "traefik.http.routers.whoami.rule=Host(`whoami-monkeys.localhost`)"
+      - "traefik.http.services.whoami.loadbalancer.server.port=8082"
 
   mysql:
     container_name: "mysql"
-    restart: always
+    restart: unless-stopped
     image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: mkcloud-sails
       MYSQL_USER: sails
       MYSQL_PASSWORD: sailsPowdj940
-    volumes:
-      - ./data/mysql:/var/lib/mysql
     networks:
       - backend
 
   elasticsearch:
     image: elasticsearch:7.9.2
-    restart: always
+    restart: unless-stopped
     container_name: "elasticsearch"
     environment:
       - node.name=es01
@@ -101,18 +108,22 @@ services:
   adminer:
     image: adminer
     container_name: "adminer"
-    restart: always
+    restart: unless-stopped
     networks:
       - backend
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.adminer.rule=Host(`adminer-monkeys.localhost`)"
-      - "traefik.http.routers.adminer.entrypoints=traefik"
+      - "traefik.http.routers.adminer.entrypoints=web"
+      - "traefik.http.services.adminer.loadbalancer.server.port=80"
+
 
 volumes:
-  mysql-data:
   esdata:
 
 networks:
   backend:
-    driver: bridge
+
+  traefik:
+    external:
+      name: traefik_webgateway
