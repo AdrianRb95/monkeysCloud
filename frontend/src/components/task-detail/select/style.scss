@@ -1,0 +1,27 @@
+@import '../../../sass/main.scss';
+
+.select-create-branch {
+  padding: 3px 5px;
+  border-radius: 5px;
+  flex: 1;
+}
+
+.select-priority {
+  border-radius: 5px;
+  flex: 1;
+  border: none;
+  outline-width: 0;
+}
+
+.select-state {
+  background: $Midnightblue-color;
+  color: white;
+  border-radius: 5px;
+  width: 130px;
+  padding: 6px 0;
+  text-transform: capitalize;
+  border: none;
+  @include sm {
+    width: 100%;
+  }
+}

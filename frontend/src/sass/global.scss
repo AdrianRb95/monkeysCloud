@@ -19,13 +19,16 @@
   grid-template-areas:
     'sidebar navbar'
     'sidebar app';
+  @include md {
+    grid-template-rows: auto 1fr;
+  }
 }
 
 .app {
   grid-area: app;
+  height: calc(100vh - 80px);
+  overflow-y: scroll;
   background: #f4f6fc;
-  min-height: calc(100vh - 80px);
-  min-width: calc(100vw - 80px);
 }
 
 .title {
@@ -97,6 +100,10 @@ button {
 }
 .justify-content-between {
   justify-content: space-between;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
 }
 
 .flex-column {

@@ -1,0 +1,28 @@
+.menu {
+  width: 217px;
+  height: 204px;
+  background-color: white;
+  right: 30px;
+  top: 90px;
+  position: absolute;
+  border: 1px solid gray;
+  box-shadow: 1px 1px;
+  border-radius: 3px;
+}
+
+div {
+  /*   margin:15px 0; */
+}
+nav div a {
+  margin: 20px 20px;
+}
+
+/* div:hover {
+  color: rgb(23, 43, 77);
+} */
+
+.external-link {
+  right: 25px;
+  position: absolute;
+  color: gray;
+}
