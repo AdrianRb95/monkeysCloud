@@ -1,0 +1,43 @@
+@import '../../../sass/main.scss';
+
+.stripe-form-card {
+  background: #e9e6e6;
+  width: 95%;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 5px;
+  box-shadow: 0 4px 2px -2px gray;
+  h3 {
+    font-size: 17px;
+  }
+  button {
+    margin-top: 5px;
+    width: 100%;
+    padding: 6px;
+    color: white;
+    font-size: 15px;
+    background: #6772e5;
+    border: none;
+    border-radius: 5px;
+    outline-width: 0;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  p {
+    display: flex;
+    justify-content: space-between;
+    .plan-price {
+      font-weight: bold;
+    }
+  }
+}
+.stripe-form {
+  display: block;
+  margin: 10px 0 20px 0;
+  padding: 10px 14px;
+  box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
+    rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+  border-radius: 4px;
+  background: white;
+}

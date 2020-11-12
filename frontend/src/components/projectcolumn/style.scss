@@ -23,6 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   @include sm {
     background: #e0e0e0;
     border-radius: 5px;
@@ -42,6 +43,7 @@
   letter-spacing: 1.13px;
   color: $secondary-gray;
   text-transform: uppercase;
+
   span {
     margin-left: 20px;
     padding: 0 5px;
@@ -50,6 +52,7 @@
 
 .project-tasks-container {
   margin-top: 15px;
+
   div + div {
     margin-top: 8px;
   }

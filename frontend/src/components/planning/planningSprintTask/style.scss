@@ -1,0 +1,35 @@
+@import "../../../sass/main.scss";
+
+.text-truncate-sm {
+  margin: 0%;
+  max-width: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.overriding-input-task {
+  font-size: 20px;
+  width: 100%;
+  padding: 10px;
+  border: none !important;
+  border-radius: 0 !important;
+  background: none;
+  &:focus,
+  &:active,
+  &:hover {
+    background: #deebff;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+}
+
+.overriding-button-status {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $secondary-blue;
+  color: white;
+  width: 100px;
+}

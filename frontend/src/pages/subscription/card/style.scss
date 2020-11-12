@@ -1,0 +1,78 @@
+@import '../../../sass/main.scss';
+
+.card-plan {
+  width: 250px;
+  background: #255ff5;
+  padding: 60px 30px;
+  border-radius: 5px;
+  color: #fff;
+  opacity: 1;
+  margin-right: 20px;
+  &:hover {
+    transform: scale(1.02);
+  }
+  @include lg {
+    max-width: 300px;
+    width: 95%;
+    margin-bottom: 30px;
+    padding: 50px 30px;
+  }
+  @include sm {
+    width: 100%;
+    margin-right: 0px;
+    padding: 40px 30px;
+  }
+}
+
+.card-plan-img-container {
+  display: flex;
+  justify-content: center;
+  font-size: 35px;
+}
+
+.card-plan-info {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.card-plan-type {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card-plan-price {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.card-plan-info > span {
+  font-size: 12px;
+}
+
+.card-plan-options {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.card-plan-options > p {
+  font-size: 15px;
+  margin: 3px 0;
+}
+
+.card-plan-button {
+  button {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    outline-width: 0;
+    color: white;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

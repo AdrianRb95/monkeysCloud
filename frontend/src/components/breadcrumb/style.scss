@@ -10,6 +10,7 @@
   position: absolute;
   height: 100%;
   width: 100%;
+
   &:hover {
     background: $special-blue;
     opacity: 0.5;
@@ -22,6 +23,7 @@
 
 .breadcrumb-text {
   padding: 10px;
+
   &:hover {
     color: $secondary-blue;
   }

@@ -1,0 +1,120 @@
+@import "../../sass/main.scss";
+
+.planning-container {
+  height: 100%;
+  width: 100%;
+}
+
+.overriding-input {
+  padding: 10px;
+  border: none !important;
+  border-radius: 0 !important;
+  &:focus,
+  &:active,
+  &:hover {
+    border: none !important;
+    border-radius: 0 !important;
+  }
+}
+
+.icon-search-button {
+  padding: 10px;
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: $midnight-gray;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-box {
+  overflow: hidden;
+  min-width: 220px;
+  border-radius: 5px;
+  border: 1px solid $gray-light;
+  &:focus,
+  &:active,
+  &:hover {
+    color: $secondary-blue;
+    border: 1px solid $secondary-blue;
+  }
+}
+
+.icon-search-change {
+  &:focus,
+  &:active,
+  &:hover {
+    color: $secondary-blue;
+  }
+}
+
+.staked-avatar {
+  margin-left: -10px;
+}
+
+.overriding-monkey-menu {
+  position: absolute;
+  top: 40px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 5px;
+}
+
+.overriding-monkeys-button-base {
+  border-radius: 5px;
+  &:hover {
+    background-color: $secondary-blue;
+    color: white;
+  }
+}
+
+.planning-sprint-container {
+  display: flex;
+  height: calc(100vh - 320px);
+  flex: 1;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.planning-version-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 320px);
+  flex: 0.33;
+  font-size: 12px;
+  background: white;
+  border: 1px solid #ececec;
+  border-bottom: 0;
+  border-left: 0;
+}
+.planning-epic-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 320px);
+  flex: 0.33;
+  font-size: 12px;
+  background: white;
+  border: 1px solid #ececec;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.planning-task-container {
+  display: flex;
+  height: calc(100vh - 320px);
+  flex: 0.33;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.planning-container-title {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #ececec;
+}

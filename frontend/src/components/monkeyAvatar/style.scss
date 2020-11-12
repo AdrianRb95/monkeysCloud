@@ -1,0 +1,32 @@
+@import "../../sass//main.scss";
+
+.simple-avatar {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  border-radius: 50%;
+  transition: 0.5s;
+  border: 1px solid white;
+  transform: translateY(0%);
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-10%);
+  }
+}
+
+.user-avatar-image {
+  height: 32px;
+  width: 32px;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: 0.5s;
+  border: 1px solid white;
+  transform: translateY(0%);
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-10%);
+  }
+}

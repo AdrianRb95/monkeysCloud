@@ -1,0 +1,13 @@
+@import "../../../sass/main.scss";
+
+.monkeys-issues-title {
+  color: #7a869a;
+}
+
+.sprint-dot-options {
+  border-radius: 5px;
+  &:hover {
+    background-color: $secondary-blue;
+    color: white;
+  }
+}

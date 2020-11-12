@@ -44,3 +44,55 @@
     justify-content: center;
   }
 }
+
+.user-filter {
+  margin: 10px 15px;
+  ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  li {
+    padding: 15px 0;
+  }
+  .icon-container {
+    background-color: rgb(19, 42, 145);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .user-icon-center {
+      color: white;
+    }
+    &:hover {
+      transform: translateY(-8px);
+    }
+  }
+
+  .selected-user {
+    border: 3px solid black;
+  }
+
+  .li-clear {
+    margin-left: 20px;
+    font-size: 16px;
+  }
+
+  .icon-container:hover {
+    background-color: #465981;
+    cursor: pointer;
+    transition: 0s;
+  }
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  input[type='checkbox']:checked ~ .user-icon-center {
+    visibility: visible;
+  }
+}

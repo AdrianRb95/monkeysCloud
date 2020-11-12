@@ -9,6 +9,7 @@
   padding: 20px;
   display: flex;
   border-left-width: 2px;
+
   flex-direction: column;
   h4 {
     font-stretch: normal;
@@ -32,10 +33,27 @@
 
 .task-card-bottom {
   margin-top: 4px;
+  display: flex;
+  align-items: center;
 }
 
-.task-card-bottom > h4 {
-  font-weight: normal;
-  line-height: 1.47;
-  color: $gray;
+.task-card-user {
+  display: flex;
+  align-items: center;
+  p {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: darkblue;
+    margin-right: 5px;
+  }
+}
+
+.task-card-bottom > p {
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  svg + svg {
+    margin-left: 6px;
+  }
 }

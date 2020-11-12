@@ -1,0 +1,22 @@
+@import "../../../sass/main.scss";
+
+.issue-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  width: 100%;
+  cursor: pointer;
+}
+
+.issue-root {
+  padding: 2px 0px;
+  width: 100%;
+}
+
+.epic-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}

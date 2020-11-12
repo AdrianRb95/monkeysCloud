@@ -22606,7 +22606,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var getPlugins = function getPlugins(_ref) {
-  var buttonList = _ref.buttonList;
+  var buttonList = _ref.buttonList,
+      customPlugins = _ref.customPlugins;
   if (!buttonList) return undefined;
   if (!isArray(buttonList)) throw new Error("Button List must be of type array");else {
     var pluginList = [];
@@ -22631,7 +22632,7 @@ var getPlugins = function getPlugins(_ref) {
     if (buttonList.indexOf("link") >= 0) pluginList.push(__webpack_require__(26).default);
     if (buttonList.indexOf("video") >= 0) pluginList.push(__webpack_require__(27).default);
     if (buttonList.indexOf("audio") >= 0) pluginList.push(__webpack_require__(28).default);
-    return pluginList;
+    return [].concat(pluginList, _toConsumableArray(customPlugins || []));
   }
 };
 
@@ -22778,7 +22779,7 @@ var SunEditor_SunEditor = /*#__PURE__*/function (_Component) {
           width = _this$props$width === void 0 ? "100%" : _this$props$width,
           height = _this$props.height;
       setOptions.lang = setOptions.lang || misc_getLanguage(lang);
-      setOptions.plugins = setOptions.plugins || misc_getPlugins(setOptions);
+      setOptions.plugins = misc_getPlugins(setOptions);
       setOptions.width = setOptions.width || width;
       if (height) setOptions.height = height;
       this.editor = suneditor.create(this.txtArea.current);

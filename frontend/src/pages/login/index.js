@@ -65,7 +65,7 @@ const Login = () => {
           </div>
           <div className='img-container'>
             <GoogleLogin
-              clientId='614969697632-v109s8e1a45j3j4qnrsksdd2fkeurn7r.apps.googleusercontent.com'
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
               buttonText=''
               onSuccess={onGoogleLogin}
               onFailure={onGoogleLogin}

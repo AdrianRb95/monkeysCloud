@@ -1,0 +1,51 @@
+@import '../../sass/main.scss';
+
+.subscription-page {
+  height: 98%;
+  h1 {
+    font-size: 36px;
+    padding: 20px 0;
+    @include sm {
+      text-align: center;
+    }
+  }
+  h2 {
+    text-align: center;
+  }
+}
+
+.subscription-page-content {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  p {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 30px auto;
+  }
+}
+
+.plans-container {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @include md {
+    overflow: scroll;
+  }
+
+  @include sm {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .card-plan:nth-child(2) {
+    background: #201f20;
+    transform: scale(1.05);
+    @include lg {
+      transform: scale(1);
+    }
+  }
+}

@@ -7,10 +7,12 @@ $Lightslategray-color: #797ca8;
 $white-color: #ffffff;
 $black-color: #000000;
 $secondary-light: #eeeeee;
+$gray-light: #e0e7ff;
 
 $Egyptianblue-rgba: rgba(30, 42, 156, 1);
 $Midnightblue-rgba: rgba(21, 34, 90, 1);
 $Brandeisblue-rgba: rgba(2, 115, 255, 1);
+$midnight-gray: rgba(224, 231, 255, 0.2);
 $Flame-rgba: rgba(242, 88, 41, 1);
 $Glitter-rgba: rgba(224, 234, 248, 1);
 $Lightslategray-rgba: rgba(121, 124, 168, 1);
@@ -22,6 +24,7 @@ $secondary-gray: #b0bac9;
 $dark-blue: #2e384d;
 $gray: #8798ad;
 $white-gray: rgba(46, 91, 255, 0.08);
+$gray-active: rgb(244, 245, 247);
 
 $theme-colors: (
   "primary": $Brandeisblue-color,
@@ -39,9 +42,10 @@ $theme-colors: (
   "white-gray": $white-gray,
   "special-blue": $special-blue,
   "secondary-light": $secondary-light,
+  "gray-light": $gray-light,
+  "midnight-gray": $midnight-gray,
+  "gray-active": $gray-active,
 );
-
-
 
 @mixin text-builder($name, $color) {
   // Example monkeys-text-primary

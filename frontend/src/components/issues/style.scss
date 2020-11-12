@@ -1,0 +1,42 @@
+@import "../../sass/main.scss";
+
+.project-action-container {
+  display: flex;
+  align-items: center;
+  @include md {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  @include sm {
+    flex-direction: column;
+  }
+}
+
+.project-mode-name {
+  @include md {
+    margin-bottom: 10px;
+  }
+}
+
+.project-mode-name > h3 {
+  font-size: 28px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  color: #2e384d;
+}
+
+.project-tasks {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  @include lg {
+    justify-content: space-evenly;
+  }
+  @include md {
+    justify-content: center;
+  }
+}

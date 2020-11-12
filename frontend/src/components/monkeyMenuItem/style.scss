@@ -1,0 +1,12 @@
+@import "../../sass/main.scss";
+
+.monkeys-menu-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  &:hover {
+    background-color: $gray-active;
+    color: rgb(23, 43, 77);
+    text-decoration: none;
+  }
+}
