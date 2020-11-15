@@ -15,6 +15,7 @@ import Sidebar from '../../components/sidebar';
 import TaskDetail from '../../components/task-detail';
 import WikiSection from '../../components/wikiSection';
 import UserManagement from '../../components/userManagement';
+import EnviromentSection from '../../components/enviromentSection';
 
 // Local
 import useHistorialActions from '../../store/historial/actions';
@@ -48,6 +49,7 @@ function Router() {
                 <Route path='/task-detail/:id' component={TaskDetail} />
                 <Route path='/wikiSection' component={WikiSection} />                
                 <Route path='/userManagement' component={UserManagement} />
+                <Route path='/enviromentSection' component={EnviromentSection} />
               </Switch>
             </div>
           </div>

@@ -1,0 +1,342 @@
+//Cards Section
+
+@import '../../sass/main.scss';
+
+.enviroment-card {
+  width: 258px;
+  height: 170px;
+  border-radius: 5px;
+  border: solid 2px rgba(46, 91, 255, 0.08);
+  padding: 35px 31px;
+  margin-right: 10px;
+  background-color:rgb(248, 248, 255);
+  @include lg {
+    margin-bottom: 15px;
+    margin-right: 5px;
+  }
+  @include sm {
+    margin-right: 0;
+    width: 150px;
+  }
+}
+
+.enviroment-card-content{
+    margin: 10px 0px;
+}
+
+ul {
+    list-style: none;
+}
+
+.github-title {
+  font-size: 15px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.47;
+  letter-spacing: normal;
+  color: #15225a;
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+.github-data-history {
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.47;
+  letter-spacing: normal;
+  color: #0273ff;
+  margin-bottom: 10px;
+  transition: .3s;
+}
+
+.github-data-history:hover{
+    color: #15225a;
+}
+
+//Enviroment Section
+.main-container{
+    width: 99%;
+    margin: auto;    
+    padding: 2rem;
+}
+
+.header-container{
+    width: auto;
+}
+
+.actions-header{
+    display: flex;    
+    justify-content: flex-end;  
+}
+
+.action-button{    
+    background-color: #8798ad;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 5px;
+    width: 120px;
+    height: 35px;
+    text-align: center;
+    line-height: 2.3;
+    margin-left: 1em;
+    transition: .5s;
+}
+
+#clone{
+    background-color: #0273ff;
+    transition: .5s;
+}
+
+.action-button:hover{
+    background-color: #15225a;
+}
+#clone:hover{
+    background-color: #93c0f8;    
+}
+
+.section-container{
+    padding-top: 3em;        
+    width: 100%;    
+    margin: auto;
+}
+
+.cards-section{         
+    width: 100%;   
+    display: flex;
+       
+}
+
+/* Popup style */
+.popup-box {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+ 
+.box {
+  position: relative;
+  width: 40%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 90vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background-color:rgb(248, 248, 255);
+  border-radius: 4px;
+  padding: 32px 20px;
+  border: 1px solid #999;  
+}
+ 
+
+.content-header{
+    font-size: larger;
+    font-weight: 500;
+    margin-bottom: 1em;
+    color: #15225a;
+    border-bottom: solid 1.5px #D3D3D3;
+    padding-bottom: 15px;
+}
+
+
+.input-control{
+    width: 100%;
+    border-radius: 3px;
+    border: solid 1.5px #D3D3D3;  
+    transition: 0s;
+    padding: 7px 12px;    
+    font-size: 14px;
+    line-height: 20px;        
+    font-weight: 500;     
+    margin: auto;
+}
+
+.placeholder
+{
+    position: relative;
+}
+
+.placeholder::after
+{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    content: attr(data-placeholder);
+    pointer-events: none;
+    opacity: 0.4;
+    font-size: smaller;
+}
+
+.separator{
+    font-size: smaller;
+    padding: 10px;
+    font-weight: 500;
+    margin: 3px 0px;
+}
+
+.tag-description{
+    padding: 15px;
+}
+
+.message-container{
+    width: 100%;
+    margin: 18px 0px;    
+}
+
+.commit-message{
+    border-radius: 3px;
+    border: solid 1.5px #D3D3D3;
+    width: 100%;
+    font-weight: 500;    
+    line-height: 25px;
+    padding: 7px 15px;    
+    font-size: 14px;
+}
+
+.popUp-buttons{
+    width: 100%;    
+    display: flex;
+    border-top: solid 1.5px #D3D3D3;
+    padding-top: 25px;    
+}
+
+
+.cancel-button{
+    border: solid 1.5px #D3D3D3;
+    padding: 6px 12px;
+    color: #0273ff;
+    background-color: #fff;
+    font-weight: 500;
+    font-size: smaller;
+    border-radius: 4px;
+    transition: .5s;
+}
+
+.cancel-button:hover{
+    background-color: #15225a;
+    color: #fff;
+}
+
+.deploy-button{
+    border: solid 1.5px #D3D3D3;
+    padding: 6px 12px;
+    color: #fff;
+    background-color: #0273ff;
+    font-weight: 500;
+    font-size: smaller;
+    margin-left: 4px;
+    border-radius: 4px;
+    transition: .5s;
+}
+
+.deploy-button:hover{
+    background-color: #8798ad;    
+    color: #15225a;    
+}
+
+.draggable-item{
+    width: 100%;
+    margin: auto;
+}
+
+
+//Media screen
+
+@media screen and (max-width: 770px) {
+    .actions-header{        
+        justify-content: end;
+        margin-top: 1em;     
+    }
+    .action-button {
+        background-color: #8798ad;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 400;
+        border-radius: 5px;
+        width: 66px;
+        height: 26px;
+        text-align: center;
+        line-height: 2.3;
+        margin-left: 0.5em;
+        transition: .5s;
+    }
+
+    .section-container {
+        padding-top: 2em;
+        width: auto;
+    }
+
+    .enviroment-card {
+        width: 150px;
+        height: 120px;
+        border-radius: 5px;
+        border: solid 2px rgba(46, 91, 255, 0.08);
+        padding: 10px;
+        margin-right: 10px;
+        background-color: ghostwhite;
+    }
+
+    .github-title {
+        font-size: 13px;
+        font-weight: 400;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.47;
+        letter-spacing: normal;
+        color: #15225a;
+        margin-bottom: 2px;
+        text-align: center;
+    }
+
+    .github-data-history {
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.47;
+        letter-spacing: normal;
+        color: #0273ff;
+        margin-bottom: 6px;
+        transition: .3s;
+    }
+
+    .cards-section {
+        display: block;
+        position: absolute;
+        width: auto;
+    } 
+}
+
+@media screen and (max-width: 400px){
+    .actions-header {
+        display: flex;
+        position: absolute;
+        right: 4em;
+        margin-top: 0.5em;
+    }
+
+    .enviroment-card {
+        width: 140px;
+        height: 115px;
+        border-radius: 5px;
+        border: solid 2px rgba(46, 91, 255, 0.08);
+        padding: 10px;
+        margin-right: 10px;
+        background-color: ghostwhite;
+    }
+
+    .cards-section {
+        display: block;
+        position: absolute;
+        right: 6em;
+        width: auto;
+    }    
+}
+
+
+
