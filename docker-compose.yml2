@@ -1,0 +1,117 @@
+version: '3.7'
+
+services:
+  traefik:
+    image: "traefik:v2.3"
+    container_name: "traefik"
+    tty: true
+    restart: always
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`traefik.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+
+  whoami:
+    image: "traefik/whoami"
+    container_name: "whoami"
+    tty: true
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami-monkeys.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+
+  mysql-app:
+      image: mysql:8.0.17
+      environment:
+        MYSQL_ROOT_PASSWORD: t3mp0r4l#*
+        MYSQL_DATABASE: monkeysapp
+      ports:
+        - "3306:3306"
+      
+  webapp:
+    restart: always
+    stdin_open: true
+    tty: true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3001:3000"
+    volumes:
+      - './frontend:/app'
+      - '/app/node_modules'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`monkeys.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+
+  sailsjs:
+    container_name: "sailsjs"
+    tty: true
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    volumes:
+      - ./backend:/usr/src/app
+    networks:
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`backend-monkeys.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+
+  elasticsearch:
+    image: elasticsearch:7.9.3
+    restart: always
+    container_name: "elasticsearch"
+    tty: true
+    environment:
+      - node.name=es01
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./data/esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9300:9300
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    container_name: "adminer"
+    tty: true
+    restart: always
+    networks:
+      - backend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.adminer.rule=Host(`adminer-monkeys.localhost`)"
+      - "traefik.http.routers.adminer.entrypoints=traefik"
+
+volumes:
+  mysql-data:
+  esdata:
+
+networks:
+  backend:
+    driver: bridge

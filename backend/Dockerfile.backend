@@ -20,10 +20,15 @@ WORKDIR /usr/src/app
 # - then it needs to copy in all files from current directory
 # - COPY ./backend .
 
+RUN npm install sails -g
+RUN npm install
 
+COPY . ./
 # - then it needs to start container with command 'tini -- node ./bin/www'
 CMD ["forever", "start" ,"./app.js","--prod"]
 CMD ["node","./app.js","--prod"]
 CMD ["node","./app.js"]
+
+
 
 # - in the end you should be using FROM, RUN, WORKDIR, COPY, EXPOSE, and CMD commands

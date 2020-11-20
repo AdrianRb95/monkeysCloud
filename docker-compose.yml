@@ -1,35 +1,16 @@
 version: '3.7'
 
 services:
-  traefik:
-    image: "traefik:v2.3"
-    container_name: "traefik"
-    restart: always
-    command:
-      - "--log.level=DEBUG"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
+  mysql-app:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: t3mp0r4l#*
+      MYSQL_DATABASE: monkeysapp
     ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`traefik.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
-
-  whoami:
-    image: "traefik/whoami"
-    container_name: "whoami"
-    restart: always
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`whoami-monkeys.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
-
+      - "3306:3306"
+    networks:
+      - backend
+      
   webapp:
     restart: always
     stdin_open: true
@@ -44,37 +25,18 @@ services:
       - '/app/node_modules'
     environment:
       - CHOKIDAR_USEPOLLING=true
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`monkeys.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
 
   sailsjs:
     container_name: "sailsjs"
+    tty: true
     restart: always
     build:
       context: ./backend
       dockerfile: Dockerfile.backend
+    ports:
+      - "3000:3000"
     volumes:
       - ./backend:/usr/src/app
-    networks:
-      - backend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`backend-monkeys.localhost`)"
-      - "traefik.http.routers.whoami.entrypoints=web"
-
-  mysql:
-    container_name: "mysql"
-    restart: always
-    image: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mkcloud-sails
-      MYSQL_USER: sails
-      MYSQL_PASSWORD: sailsPowdj940
-    volumes:
-      - ./data/mysql:/var/lib/mysql
     networks:
       - backend
 
@@ -82,6 +44,7 @@ services:
     image: elasticsearch:7.9.3
     restart: always
     container_name: "elasticsearch"
+    tty: true
     environment:
       - node.name=es01
       - cluster.name=docker-cluster
@@ -94,20 +57,9 @@ services:
     volumes:
       - ./data/esdata:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - 9300:9300
     networks:
       - backend
-
-  adminer:
-    image: adminer
-    container_name: "adminer"
-    restart: always
-    networks:
-      - backend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.adminer.rule=Host(`adminer-monkeys.localhost`)"
-      - "traefik.http.routers.adminer.entrypoints=traefik"
 
 volumes:
   mysql-data:
