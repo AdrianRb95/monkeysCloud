@@ -1,5 +1,5 @@
 module.exports = {
-
+    datastore: 'default',
     attributes: {
         id: {
             type: 'number',

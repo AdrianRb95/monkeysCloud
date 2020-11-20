@@ -1,44 +1,26 @@
 # monkeycloud
 
-Task Manager and Git Workflow
+a [Sails v1](https://sailsjs.com) application
 
-## Docker Local Buils
-Need to install docker and docker compose [Installation Guide](https://docs.docker.com/compose/install/)
 
- * Build container image: `docker-compose up -d`
- 
- 
- ## Error Bind for 0.0.0.0:8080 failed: port is already allocated
- 
- Fixed with https://github.com/docker/compose/issues/4950#issuecomment-398879461
+### Links
 
-## setup
++ [Sails framework documentation](https://sailsjs.com/get-started)
++ [Version notes / upgrading](https://sailsjs.com/documentation/upgrading)
++ [Deployment tips](https://sailsjs.com/documentation/concepts/deployment)
++ [Community support options](https://sailsjs.com/support)
++ [Professional / enterprise options](https://sailsjs.com/enterprise)
 
-Install locally MySql https://dev.mysql.com/downloads/mysql/
 
-Install node: https://nodejs.org/en/download/
+### Version info
 
-Setup a database with the name you desire either through a shell or in mysql workbench.
+This app was originally generated on Fri Nov 20 2020 01:42:48 GMT-0600 (Central Standard Time) using Sails v1.4.0.
 
-inside of /config/datastores.js change url to your current settings.
+<!-- Internally, Sails used [`sails-generate@2.0.0`](https://github.com/balderdashy/sails-generate/tree/v2.0.0/lib/core-generators/new). -->
 
-After this is done run npm install, and then run npm run start.
 
-## how does the api work
-Check the files in models to find out how the database is setup if you want to see how the input to the endpoints is handled look
-controllers folder, both of this folders are located inside the api folder.
 
-to check the end points of the specific controller check the corresponding action on the routes file found on the config folder
-in the root folder of the app.
+<!--
+Note:  Generators are usually run using the globally-installed `sails` CLI (command-line interface).  This CLI version is _environment-specific_ rather than app-specific, thus over time, as a project's dependencies are upgraded or the project is worked on by different developers on different computers using different versions of Node.js, the Sails dependency in its package.json file may differ from the globally-installed Sails CLI release it was originally generated with.  (Be sure to always check out the relevant [upgrading guides](https://sailsjs.com/upgrading) before upgrading the version of Sails used by your app.  If you're stuck, [get help here](https://sailsjs.com/support).)
+-->
 
-## links
-Here are some links that might be helpful
-https://sailsjs.com/documentation/concepts/actions-and-controllers
-https://sailsjs.com/documentation/concepts/models-and-orm/attributes
-https://sailsjs.com/documentation/concepts/models-and-orm/associations
-
-if you encounter the client does not support authentication error check this link 
-https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server
-
-## to do
-Access control this is handled through policies file inside the config folder. 

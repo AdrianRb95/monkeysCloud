@@ -9,18 +9,14 @@
  */
 
 module.exports.policies = {
+
   /***************************************************************************
-   *                                                                          *
-   * Default policy for all controllers and actions, unless overridden.       *
-   * (`true` allows public access)                                            *
-   *                                                                          *
-   ***************************************************************************/
-  "*": ["auth"],
+  *                                                                          *
+  * Default policy for all controllers and actions, unless overridden.       *
+  * (`true` allows public access)                                            *
+  *                                                                          *
+  ***************************************************************************/
+
   // '*': true,
-  UserController: {
-    //'*': 'isLoggedIn',
-    login: true,
-    create: true,
-    googleLogin: true,
-  },
+
 };

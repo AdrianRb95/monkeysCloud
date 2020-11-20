@@ -2,7 +2,7 @@
  * parasails.js
  * (lightweight structures for apps with more than one page)
  *
- * v0.7.11
+ * v0.9.2
  *
  * Copyright 2014-present, Mike McNeil (@mikermcneil)
  * MIT License
@@ -110,6 +110,7 @@
         if ($rootEl.length !== 1) { throw new Error('Cannot use .$focus() - something is wrong with this '+currentModuleEntityNoun+'\'s top-level DOM element.  (It probably has not mounted yet!)'); }
         var $fieldToAutoFocus = $rootEl.find(subSelector);
         if ($fieldToAutoFocus.length === 0) { throw new Error('Could not autofocus-- no such element exists within this '+currentModuleEntityNoun+'.'); }
+        // FUTURE: ^^ if that happens, try calling await this.forceRender() and then try again one more time before giving up
         if ($fieldToAutoFocus.length > 1) { throw new Error('Could not autofocus `'+subSelector+'`-- too many elements matched!'); }
         $fieldToAutoFocus.focus();
       };
@@ -176,7 +177,7 @@
         'methods',
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        // TODO: Add `this.listen()` and `this.ignore()` -- see:
+        // FUTURE: Add `this.listen()` and `this.ignore()` -- see:
         // https://github.com/mikermcneil/parasails/commit/5b948a1a8a0945b19ccea6da3e7354255d3dc0b6
         // (and also 83c439dc1f3a0375e67066fffe9151581cbab639)
         //
@@ -406,9 +407,6 @@
               '<small>This message will not be displayed in production.  '+
               'If you\'re unsure, <a href="https://sailsjs.com/support">ask for help</a>.</small><br/>'+
               '<small>'+_.escape(new Date())+'</small>'+
-              // '<br/><br/>'+
-              // '<span>High-level summary:</span>'+
-              // '<code><pre>'+_.escape(errorSummary)+'</pre></code>'+
             '</p>'+
           '</div>'+
         '</div>')
@@ -486,6 +484,15 @@
       }
     };//œ   </ on uncaught error >
 
+    // Bind top-level uncaught promise rejection handler.
+    // > https://developer.mozilla.org/en-US/docs/Web/Events/unhandledrejection
+    // (Only works in desktop Chrome as of Oct 2018, but over time, this will
+    // hopefully get better.  In the mean time, doesn't hurt anything, and it's
+    // only for development anyway.)
+    window.addEventListener('unhandledrejection', function (event) {
+      _displayErrorOverlay(event&&event.reason? event.reason : event);
+    });//œ  </ on unhandled promise rejection >
+
     // Configure Vue to share its beforeMount errors (and others) with us.
     // > https://vuejs.org/v2/api/#errorHandler
     Vue.config.errorHandler = function (err, unusedVm, errorSourceDisplayName) {
@@ -495,7 +502,6 @@
         } else {
           err.message = 'In '+errorSourceDisplayName+': '+err.message;
         }
-        // err.message += '\n [?] If you\'re unsure, get help: https://sailsjs.com/support';
       } else {
         var _originalNotActuallyErr = err;
         err = new Error(_originalNotActuallyErr);
@@ -505,7 +511,7 @@
       _displayErrorOverlay(err);
     };//ƒ
 
-    // Also those warnings -- but we'll treat them like errors because
+    // Also those Vue warnings -- but we'll treat them like errors because
     // we're serious about code quality.  (Plus, early detection of bugs
     // and typos saves so much time down the road!)
     // > `trace` is the component hierarchy trace
@@ -642,15 +648,29 @@
 
     // Attach `goto` method, for convenience.
     if (def.methods && def.methods.goto) { throw new Error('Component definition contains `methods` with a `goto` key-- but you\'re not allowed to override that'); }
+    if (def.methods && def.methods.gotoAndReplaceHistory) { throw new Error('Component definition contains `methods` with a `gotoAndReplaceHistory` key-- but you\'re not allowed to override that'); }
     def.methods = def.methods || {};
-    if (VueRouter) {
-      def.methods.goto = function (rootRelativeUrl){
+    def.methods.goto = function (rootRelativeUrl){
+      // If the Bowser browser detection library is installed
+      // (https://github.com/lancedikson/bowser/releases), check whether
+      // we're in Edge or IE, in which case we'll add some special handling
+      // for an edge case in `onbeforeunload` behavior.
+      var isIEOrEdgeBrowser = bowser && (bowser.name === 'Internet Explorer' || bowser.name === 'Microsoft Edge');
+      if(!isIEOrEdgeBrowser) {
         window.location = rootRelativeUrl;
-      };
-    }
-    else {
-      def.methods.goto = function (){ throw new Error('Cannot use .goto() method because, at the time when this component was registered, VueRouter did not exist on the page yet. (If you\'re using Sails, please check dependency loading order in pipeline.js and make sure VueRouter is getting brought in before `parasails`.)'); };
-    }
+      } else {
+        try {
+          // IE/Edge prefers "window.location.href"
+          window.location.href = rootRelativeUrl;
+        } catch(unusedErr) {
+          // More helpful error message for unavoidable error during onbeforeunload edge case in IE/Edge
+          throw new Error('`goto` failed in Edge or IE! If navigation was cancelled in `beforeunload`, you can probably ignore this message (see https://stackoverflow.com/questions/1509643/unknown-exception-when-cancelling-page-unload-with-location-href/1510074#1510074).');
+        }
+      }
+    };
+    def.methods.gotoAndReplaceHistory = function (rootRelativeUrl){
+      window.location.replace(rootRelativeUrl);
+    };
 
     // Finally, register as a global Vue component.
     Vue.component(componentName, def);
@@ -711,9 +731,9 @@
     didAlreadyLoadPageScript = true;
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // TODO: Set `parasails._mountedPage = pageName;` and use that in the `goto` method of components to still do the
-    // check for a virtualPageRegExp and allow it to conditionaly do a "soft" client-side navigation to avoid page reload.
-    // (Remember: There's only ever one registered page script mounted in the DOM when you're using parasails.)
+    // FUTURE: Maybe set `parasails._mountedPage = pageName;` and use that in the `goto` method of components to still
+    // do the check for a virtualPageRegExp and allow it to conditionaly do a "soft" client-side navigation to avoid page
+    // reload. (Remember: There's only ever one registered page script mounted in the DOM when you're using parasails.)
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     // Automatically set `el`
@@ -789,32 +809,75 @@
       // Then call the original, custom "mounted" function, if there was one.
       if (customMountedLC) {
         customMountedLC.apply(this, []);
+        // ^FUTURE: consider whether it's worth dealing with the possibility
+        // of uncaught promise rejections here (b/c it might be an `async function`!)
       }
     };//ƒ
 
-    // Automatically attach `pageName` to `data`, for convenience.
+    // Now, for convenience, automatically add built-in defaults to our `data`:
     if (def.data && def.data.pageName) { throw new Error('Page script definition contains `data` with a `pageName` key, but you\'re not allowed to override that'); }
     def.data = _.extend({
-      pageName: pageName
+      pageName: pageName,
+      _: _,
     }, def.data||{});
+    if (bowser && !def.data.hasOwnProperty('bowser')) {
+      def.data.bowser = bowser;
+    }
+
+    // And, as of Parasails ≥0.9, automatically merge in the contents of SAILS_LOCALS, if present.
+    // > (this is so that you don't have to include boilerplate code inside beforeMount of page scripts
+    // > to merge in data from the server)
+    if (typeof window !== 'undefined' && _.isObject(window.SAILS_LOCALS) && !_.isArray(window.SAILS_LOCALS) && !_.isFunction(window.SAILS_LOCALS)) {
+      _.extend(def.data, window.SAILS_LOCALS);
+    }
 
     // Attach `goto` method, for convenience.
     if (def.methods && def.methods.goto) { throw new Error('Page script definition contains `methods` with a `goto` key-- but you\'re not allowed to override that'); }
+    if (def.methods && def.methods.gotoAndReplaceHistory) { throw new Error('Page script definition contains `methods` with a `gotoAndReplaceHistory` key-- but you\'re not allowed to override that'); }
     def.methods = def.methods || {};
     if (VueRouter) {
       var _virtualPagesRegExp = def.virtualPagesRegExp;
-      def.methods.goto = function (rootRelativeUrlOrOpts){
+
+      // The following inline function definition exists purely to avoid
+      // duplication of code in `goto` and `gotoAndReplaceHistory` below:
+      var _goto = function($router, rootRelativeUrlOrOpts, replaceHistory) {
         // FUTURE: add support for using '../' without reloading the page
         // (even though it doesn't technicaly match the regexp)
         if (!_virtualPagesRegExp || (_.isString(rootRelativeUrlOrOpts) && !rootRelativeUrlOrOpts.match(_virtualPagesRegExp))) {
-          window.location = rootRelativeUrlOrOpts;
+          if (replaceHistory) {
+            window.location.replace(rootRelativeUrlOrOpts);
+          } else {
+            window.location = rootRelativeUrlOrOpts;
+          }
         } else {
-          return this.$router.push(rootRelativeUrlOrOpts);
+          if (replaceHistory) {
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // FUTURE: also look into something like this for cleaner handling
+            // of back/forward navigation for things like permalinked modals:
+            // • https://stackoverflow.com/a/29227026/486547
+            //
+            // gotoAndReplaceHistory() works great for handling client-side
+            // redirects within an afterNavigate function, but it doesn't work
+            // great for removing stuff from the history stack.  Because that's
+            // impossible, tbh.  So to truly solve that, you need a much more
+            // opinionated solution (see above link & treeline2 for examples).
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            return $router.replace(rootRelativeUrlOrOpts);
+          } else {
+            return $router.push(rootRelativeUrlOrOpts);
+          }
         }
-      };
+      };//ƒ
+      def.methods.goto = function (rootRelativeUrlOrOpts){
+        return _goto(this.$router, rootRelativeUrlOrOpts);
+      };//ƒ
+      def.methods.gotoAndReplaceHistory = function (rootRelativeUrlOrOpts){
+        return _goto(this.$router, rootRelativeUrlOrOpts, true);
+      };//ƒ
     }
     else {
       def.methods.goto = function (){ throw new Error('Cannot use .goto() method because, at the time when this page script was registered, VueRouter did not exist on the page yet. (If you\'re using Sails, please check dependency loading order in pipeline.js and make sure VueRouter is getting brought in before `parasails`.)'); };
+      def.methods.gotoAndReplaceHistory = function (){ throw new Error('Cannot use .gotoAndReplaceHistory() method because, at the time when this page script was registered, VueRouter did not exist on the page yet. (If you\'re using Sails, please check dependency loading order in pipeline.js and make sure VueRouter is getting brought in before `parasails`.)'); };
     }
 
     // If virtualPages-related stuff was specified, check usage and tolerate shorthand.

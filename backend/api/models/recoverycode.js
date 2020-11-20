@@ -1,5 +1,5 @@
-
 module.exports = {
+    datastore: 'default',
     attributes: {
         idUser: {
             model: 'user',

@@ -46,9 +46,9 @@ module.exports = {
     *    (See https://sailsjs.com/config/datastores for help.)                 *
     *                                                                          *
     ***************************************************************************/
-   default: {
-    adapter: 'sails-mysql',
-    url: 'mysql://root:t3mp0r4l#*@localhost:33060/monkeysapp'
+    default: {
+      // adapter: 'sails-mysql',
+      // url: 'mysql://user:password@host:port/database',
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.
@@ -90,7 +90,7 @@ module.exports = {
     * https://sailsjs.com/docs/concepts/models-and-orm/model-settings#?migrate *
     *                                                                          *
     ***************************************************************************/
-    migrate: 'alter',
+    migrate: 'safe',
 
     /***************************************************************************
     *                                                                          *
@@ -373,32 +373,24 @@ module.exports = {
   * > See config/custom.js for more info on how to configure these options. *
   *                                                                         *
   ***************************************************************************/
-  // custom: {
-  //   baseUrl: 'https://example.com',
-  //   internalEmailAddress: 'support@example.com',
+  custom: {
+    baseUrl: 'https://example.com',
+    internalEmailAddress: 'support@example.com',
 
-  //   // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
-  //   // stripeSecret: 'sk_prod__fake_Nfgh82401348jaDa3lkZ0d9Hm',
-  //   //--------------------------------------------------------------------------
-  //   // /\   OR, to avoid checking them in to version control, you might opt to
-  //   // ||   set sensitive credentials like these using environment variables.
-  //   //
-  //   // For example:
-  //   // ```
-  //   // sendgridSecret=SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU
-  //   // sails_custom__stripeSecret=sk_prod__fake_Nfgh82401348jaDa3lkZ0d9Hm
-  //   // ```
-  //   //--------------------------------------------------------------------------
+    // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
+    // stripeSecret: 'sk_prod__fake_Nfgh82401348jaDa3lkZ0d9Hm',
+    //--------------------------------------------------------------------------
+    // /\   OR, to avoid checking them in to version control, you might opt to
+    // ||   set sensitive credentials like these using environment variables.
+    //
+    // For example:
+    // ```
+    // sendgridSecret=SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU
+    // sails_custom__stripeSecret=sk_prod__fake_Nfgh82401348jaDa3lkZ0d9Hm
+    // ```
+    //--------------------------------------------------------------------------
 
-  // },
-
-  emailConfiguration:{
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false,
-    user: 'cokipnw4awetc2jr@ethereal.email', // generated ethereal user
-    pass: '5YFXqk2DF6N8seAcPj'
-  }
+  },
 
 
 
