@@ -17,6 +17,13 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
+  "*": ["auth"],
   // '*': true,
+  UserController: {
+    //'*': 'isLoggedIn',
+    login: true,
+    create: true,
+    googleLogin: true,
+  },
 
 };

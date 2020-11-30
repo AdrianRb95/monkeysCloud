@@ -35,7 +35,7 @@ module.exports = {
             required: false
         },
         //New field, relationship one to one with the enviroment module
-        relatedProjects: { //one to many relationship
+        relatedPs: { //one to many relationship
             collection: 'projects',
             via: 'company'
         }        
