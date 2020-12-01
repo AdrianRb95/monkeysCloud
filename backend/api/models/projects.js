@@ -39,7 +39,7 @@ module.exports = {
             unique: true,
             required: true
         },
-        enviromentsProject: {
+        enviromentsP: {
             collection: 'enviroments'
         },
         agency: { //one to many relationship one agency can have multiple projects

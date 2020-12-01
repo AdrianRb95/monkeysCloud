@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import './style.scss';
 import Card from './card';
 import options from './options';
-import Stripe from './stripe';
+// import Stripe from './stripe';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
@@ -33,11 +33,11 @@ const Subscription = () => {
         </div>
       </div>
       <Elements stripe={stripePromise}>
-        <Stripe
+        {/* <Stripe
           openModal={openModal}
           closeModal={() => setOpenModal(false)}
           {...data}
-        />
+        /> */}
       </Elements>
     </>
   );

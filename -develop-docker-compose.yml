@@ -1,0 +1,118 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis:5.0.5
+    volumes:
+      - type: volume
+        source: redis
+        target: /data
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    networks:
+      - local
+
+  mysqlapp:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: t3mp0r4l
+      MYSQL_DATABASE: monkeysapp
+    ports:
+      - "3306:3306"
+    networks:
+      - local
+
+  sailsjs:
+    container_name: "sailsjs"
+    tty: true
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    ports:
+      - "1337:1337"
+      - 9337:9337
+    environment:
+      PORT: 1337
+      DEBUG_PORT: 9337
+      WAIT_HOSTS: mysqlapp:3306,redis:6379
+      NODE_ENV: development
+      MYSQL_URL: mysql://root:t3mp0r4l@localhost:3306/monkeysapp
+    volumes:
+      - ./backend:/usr/src/app
+    networks:
+      - local
+    depends_on:
+      - "mysqlapp"
+      - "redis"
+
+  webapp:
+    restart: always
+    stdin_open: true
+    tty: true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"      
+    volumes:
+      - './frontend:/app'
+      - '/app/node_modules'
+    environment:
+      REACT_APP_API_URL: http://webapp.monkeys.local
+      # - CHOKIDAR_USEPOLLING=true
+    networks:
+      - local
+    depends_on:
+      - "sailsjs"
+
+  nginx:
+    build: nginx
+    image: nginx-wait:latest
+    restart: on-failure
+    environment:
+      WAIT_HOSTS: sailsjs:1337,webapp:3000
+    volumes:
+      - type: bind
+        source: ./nginx/conf.d
+        target: /etc/nginx/conf.d
+      - type: bind
+        source: ./nginx/log
+        target: /var/log/nginx
+    ports:
+      - 80:80
+    networks:
+      - local
+    depends_on:
+      - "sailsjs"
+      - "webapp"
+
+  # elasticsearch:
+  #   image: elasticsearch:7.9.3
+  #   restart: always
+  #   container_name: "elasticsearch"
+  #   tty: true
+  #   environment:
+  #     - node.name=es01
+  #     - cluster.name=docker-cluster
+  #     - bootstrap.memory_lock=true
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   volumes:
+  #     - ./data/esdata:/usr/share/elasticsearch/data
+  #   ports:
+  #     - 9300:9300
+  #   networks:
+  #     - local
+
+networks:
+  local:
+    driver: bridge
+
+volumes:
+  mysqlapp:
+  redis:

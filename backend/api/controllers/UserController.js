@@ -33,12 +33,13 @@ module.exports = {
   },
 
   read: async function (req, res) {
-    if (req.params.id) {
-      const user = await User.findOne(req.params.id);
-      res.json(user);
-    } else {
-      res.notFound();
-    }
+    // if (req.params.id) {
+    //   const user = await User.findOne(req.params.id);
+    //   res.json(user);
+    // } else {
+    //   res.notFound();
+    // }
+    res.json("hello 22");
   },
 
   update: async function (req, res) {

@@ -8,7 +8,7 @@
 module.exports = {
   
     create: async function(req, res){
-        if(req.body != nu(ll){
+        if(req.body != null){
             const createdComponent = await component.create(req.body).fetch();
             return res.json(createdComponent);
         }

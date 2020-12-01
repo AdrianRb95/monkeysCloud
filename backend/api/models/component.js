@@ -2,14 +2,14 @@ module.exports ={
     datastore: 'default',
     attributes:{
         //agregar atributo id
-        id:{
-            type:'number',
-            columnName:' idcomponent',
-            columnType:'int',
-            autoIncrement: true,
-            unique: true,
-            required: false
-        },
+        // id:{
+        //     type:'number',
+        //     columnName:' idcomponent',
+        //     columnType:'int',
+        //     unique: true,
+        //     autoIncrement: true,
+        //     required: false
+        // },
         name:{
             type:'string',
             columnName:'name',
@@ -26,7 +26,5 @@ module.exports ={
             model: 'tasks',
             unique:true
         }
-
     },
-
 }

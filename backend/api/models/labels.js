@@ -2,14 +2,14 @@ module.exports = {
   datastore: 'default',
   attributes:{
       //id y nombre
-    id:{
-      type:'number',
-      columnName:' idlabel',
-      columnType:'int',
-      autoIncrement: true,
-      unique: true,
-      required: false
-    },
+    // id:{
+    //   type:'number',
+    //   columnName:' idLabel',
+    //   columnType:'int',
+    //   autoIncrement: true,
+    //   unique: true,
+    //   required: false
+    // },
     name:{
        type:'string',
        columnName:'name',
