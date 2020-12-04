@@ -47,9 +47,12 @@ function Router() {
                 <Route path='/all-enviroment' component={AllEnviroment} />
                 <Route path='/dev-enviroment' component={DevEnviroment} />
                 <Route path='/task-detail/:id' component={TaskDetail} />
-                <Route path='/wikiSection' component={WikiSection} />                
+                <Route path='/wikiSection' component={WikiSection} />
                 <Route path='/userManagement' component={UserManagement} />
-                <Route path='/enviromentSection' component={EnviromentSection} />
+                <Route
+                   path='/enviromentSection'
+                   component={EnviromentSection}
+                 />
               </Switch>
             </div>
           </div>
