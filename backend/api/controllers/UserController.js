@@ -12,11 +12,13 @@ const client = new OAuth2Client(sails.config.globals.googleClient)
 module.exports = {
   create: async function (req, res) {
     try {
-      const user = await User.create(req.body).fetch();
-      const token = await sails.helpers.generateAuthToken(user.id);
-      res.send({ user, token });
+      console.log(req.body);
+      const userCreated = await user.create(req.body).fetch();
+      const token = await sails.helpers.generateAuthToken(userCreated.id);
+      res.send({ userCreated, token });
     } catch (error) {
       res.badRequest();
+      console.log(error);
     }
   },
 
@@ -32,20 +34,20 @@ module.exports = {
     }
   },
 
-  read: async function (req, res) {
-    // if (req.params.id) {
-    //   const user = await User.findOne(req.params.id);
-    //   res.json(user);
-    // } else {
-    //   res.notFound();
-    // }
-    res.json("hello 22");
+  read: async function (req, res) {    
+      if (req.params.id) {
+        const data = await user.findOne(req.params.id);        
+        res.json({user: data});
+
+      } else {
+        res.notFound();
+      }    
   },
 
   update: async function (req, res) {
     try {
-      const user = await User.update(req.user).set(req.body).fetch();
-      res.send({ user });
+      const userUpdate = await user.update(req.user).set(req.body).fetch();
+      res.send({ userUpdate });
     } catch (error) {
       res.badRequest();
     }
@@ -53,7 +55,7 @@ module.exports = {
 
   delete: async function (req, res) {
     try {
-      await User.destroyOne(req.user);
+      await user.destroyOne(req.user);
       res.send();
     } catch (error) {
       res.badRequest();
