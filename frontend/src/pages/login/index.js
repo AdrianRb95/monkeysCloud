@@ -3,6 +3,8 @@ import GoogleLogin from 'react-google-login';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
+import './style.scss';
+
 import AppInput from '../../components/form/appInput';
 import AppForm from '../../components/form/appForm';
 import Button from '../../components/form/button';
@@ -10,7 +12,7 @@ import Google from '../../assets/logo/logo-google.png';
 import Monkey from '../../assets/logo/monkey.png';
 import Logo from '../../assets/logo/logo.png';
 
-import './style.scss';
+import useAuth from '../../store/auth/actions';
 
 const initialState = {
   email: '',
@@ -23,11 +25,13 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const { login, googleLogin } = useAuth();
+
   const onSubmit = async values => {
-    console.log(values);
+    await login(values);
   };
 
-  const onGoogleLogin = response => console.log(response);
+  const onGoogleLogin = response => googleLogin(response.tokenId);
 
   return (
     <div className='login-page'>

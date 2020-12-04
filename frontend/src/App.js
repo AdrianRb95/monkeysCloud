@@ -1,7 +1,5 @@
 import Axios from 'axios';
 import React, { useEffect } from 'react';
-// import $ from 'jquery';
-// import Popper from 'popper.js';
 import Router from './containers/router';
 function App() {
     var axios = require('axios');
