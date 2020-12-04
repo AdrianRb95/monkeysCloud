@@ -5,6 +5,9 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const {OAuth2Client} = require("google-auth-library")
+const client = new OAuth2Client(sails.config.globals.googleClient)
+
 module.exports = {
   
     create: async function(req, res){
@@ -12,6 +15,7 @@ module.exports = {
             return res.send('null body');
         else{
             const createdAgency = await agency.create(req.body).fetch();
+            //const token = await sails.helpers.generateAuthToken(user.id);
             return res.json(createdAgency);
         }
     },
