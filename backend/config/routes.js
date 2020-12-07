@@ -64,11 +64,16 @@ module.exports.routes = {
   //'GET /user/read/:id': 'UserController.read',
 
   'POST /User/Create': {controller: "User", action: "create"},
-  'GET /User/Read/:id': {controller: "User", action: "read"},  
+  'GET /User/Read/:id': {controller: "User", action: "read"},
+  'GET /user/me': 'UserController.me',
   'PATCH /User/Update': {controller: "User", action: "update"},
   'DELETE /User/Delete': {controller: "User", action: "delete"},
   'POST /User/LogIn': {controller: "User", action: "login"},
   'POST /User/GoogleLogIn': {controller: "User", action: "googleLogin"},
+  'POST /user/checkout/subscription': 'UserController.subscription',
+  'POST /user/checkout/changeCreditCard': 'UserController.changeCreditCard',
+  'POST /user/checkout/cancel': 'UserController.cancelSubscription',
+  'POST /user/checkout/test': 'UserController.test',
 
   //WorkinfoController Routes
   'POST /Workinformation/Create': {controller: "Workinfo", action: "create"},
@@ -178,6 +183,10 @@ module.exports.routes = {
   'PATCH /WorkLog/Update': {controller: "WorkLog", action: "update"},
   'DELETE /WorkLog/Delete': {controller: "WorkLog", action: "delete"},
 
+  'POST /epic/:id/tasks': 'TasksController.addSubTask',
+  'GET /epic/:id/tasks': 'TasksController.getEpicTasks',
+
+  
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
