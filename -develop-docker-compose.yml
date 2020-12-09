@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   redis:
@@ -16,7 +16,7 @@ services:
   mysqlapp:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: t3mp0r4l
+      MYSQL_ROOT_PASSWORD: "123456"
       MYSQL_DATABASE: monkeysapp
     ports:
       - "3306:3306"
@@ -38,7 +38,7 @@ services:
       DEBUG_PORT: 9337
       WAIT_HOSTS: mysqlapp:3306,redis:6379
       NODE_ENV: development
-      MYSQL_URL: mysql://root:t3mp0r4l@localhost:3306/monkeysapp
+      MYSQL_URL: mysql://root:123456@localhost:3306/monkeysapp
     volumes:
       - ./backend:/usr/src/app
     networks:
@@ -55,10 +55,10 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.frontend
     ports:
-      - "3000:3000"      
+      - "3000:3000"
     volumes:
-      - './frontend:/app'
-      - '/app/node_modules'
+      - "./frontend:/app"
+      - "/app/node_modules"
     environment:
       REACT_APP_API_URL: http://webapp.monkeys.local
       # - CHOKIDAR_USEPOLLING=true
