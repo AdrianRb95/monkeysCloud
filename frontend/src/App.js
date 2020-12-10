@@ -6,7 +6,7 @@ function App() {
 
     var config = {
       method: 'get',
-      url: 'http://localhost:1337/User/Read',
+      url: 'http://localhost:1337/User/Read/1',
       headers: { 
         'Cookie': 'sails.sid=s%3AwcCdJfU1-ajehetKxXh_YCAvnTVq-R7t.0zXjXyaMzSoDDIDeQe9s7ZWjzml0kB7SXQsFnXo%2BO0s'
       }

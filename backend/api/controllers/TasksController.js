@@ -7,12 +7,15 @@
 
 module.exports = {
     create: async function (req, res) {
-      if (Object.keys(req.body) == 0) {
-        return res.send("null body");
-      } else {
-        const taskCreated = await tasks.create(req.body).fetch();
-        return res.json(taskCreated);
+      try{
+        const newTask = await tasks.create(req.body).fetch();
+        const token = await sails.helpers.generateAuthToken(newTask.id);
+        return res.json({tasks: newTask, token});
       }
+      catch(error){
+        res.serverError("Invalid Data");
+        console.log(error);
+      }     
     },
     read: async function (req, res) {
       if (req.params.id != undefined) {

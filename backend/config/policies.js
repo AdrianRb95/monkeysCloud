@@ -26,5 +26,9 @@ module.exports.policies = {
     read: true,
     googleLogin: true,
   },
+  TasksController: {
+    create: true,
+    read: true,
+  }
 
 };

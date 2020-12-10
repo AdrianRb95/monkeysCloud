@@ -17,13 +17,14 @@ module.exports.session = {
    * of your users, forcing them to log in again.                             *
    *                                                                          *
    ***************************************************************************/
-  secret: "41fdaf54f1a422aaa384a3d138859b5f",
-  adapter: "express-mysql-session",
-  host: "localhost",
+  secret: 'e1cd67aa37f92de99a828ef298f2bcd1',
+  //secret: "41fdaf54f1a422aaa384a3d138859b5f",
+  adapter: 'express-mysql-session',
+  host: 'localhost',
   port: 3306,
-  user: "root",
-  password: "password",
-  database: "monkeycloud",
+  user: 'root',
+  password: '1234',
+  database: 'monkeycloud',
   ssl: false,
   stringify: true,
   cookie: {
