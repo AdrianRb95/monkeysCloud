@@ -21,11 +21,12 @@ function Sidebar() {
   const handleClick = useCallback(
     () => {
       toggleSidebar();
-      toggleHistorial();
+      //toggleHistorial();
     },
     // eslint-disable-next-line
     []
   );
+
 
   return (
     <div
