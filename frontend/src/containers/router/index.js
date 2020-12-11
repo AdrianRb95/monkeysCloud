@@ -58,7 +58,10 @@ function Router() {
                 <Route path='/task-detail/:id' component={TaskDetail} />
                 <Route path='/wikiSection' component={WikiSection} />
                 <Route path='/userManagement' component={UserManagement} />
-                <Route path='/enviromentSection' component={EnviromentSection} />
+                <Route
+                   path='/enviromentSection'
+                   component={EnviromentSection}
+                 />
               </Switch>
             </div>
           </div>

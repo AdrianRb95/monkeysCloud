@@ -4,7 +4,7 @@ import actions from './constants';
 
 const defaultState = {
   user: {},
-  loading: true,
+  isLoading: false,
 };
 
 const reducer = (state = defaultState, action = {}) => {
@@ -14,7 +14,7 @@ const reducer = (state = defaultState, action = {}) => {
       return {
         ...state,
         user: payload,
-        loading: false,
+        isLoading: false,
       };
     default: {
       return state;
