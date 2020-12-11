@@ -1,0 +1,30 @@
+.editable-input {
+  margin: 20px 10px;
+
+  h6 {
+    opacity: 0.6;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+  }
+  h5 {
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 5px;
+  }
+  input {
+    width: 100%;
+    border-radius: 3px;
+    border: none;
+    border: 1px solid gray;
+    height: 25px;
+    outline-width: 0;
+    padding-left: 5px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  textarea {
+    outline-width: 0;
+    width: 100%;
+    padding: 3px;
+  }
+}

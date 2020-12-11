@@ -1,0 +1,45 @@
+@import '../../../sass/main.scss';
+
+.user-detail-page-modal {
+  border-radius: 5px;
+  width: 500px;
+  background: white;
+  border: 1px solid gray;
+  padding: 15px;
+  @include sm {
+  }
+  h4 {
+    text-transform: capitalize;
+  }
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__content {
+    margin-top: 15px;
+    .form-group {
+      label {
+        font-size: 11px;
+        color: gray;
+      }
+      input {
+        height: 30px;
+        font-size: 12px;
+        padding-left: 8px;
+      }
+      .error-message {
+        font-size: 12px;
+      }
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 20px;
+      background: $Brandeisblue-color;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+  }
+}
