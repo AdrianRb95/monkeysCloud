@@ -7,6 +7,7 @@ import DevEnviroment from '../../pages/devEnviroment';
 import Login from '../../pages/login';
 import Manage from '../../pages/manage';
 import Subscription from '../../pages/subscription';
+import UserDetail from '../../pages/userDetail';
 
 //components
 import Historial from '../../components/historial';
@@ -57,11 +58,12 @@ function Router() {
                 <Route path='/dev-enviroment' component={DevEnviroment} />
                 <Route path='/task-detail/:id' component={TaskDetail} />
                 <Route path='/wikiSection' component={WikiSection} />
+                <Route exact path='/user/details' component={UserDetail} />
                 <Route path='/userManagement' component={UserManagement} />
                 <Route
-                   path='/enviromentSection'
-                   component={EnviromentSection}
-                 />
+                  path='/enviromentSection'
+                  component={EnviromentSection}
+                />
               </Switch>
             </div>
           </div>
