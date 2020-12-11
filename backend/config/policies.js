@@ -9,13 +9,12 @@
  */
 
 module.exports.policies = {
-
   /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions, unless overridden.       *
-  * (`true` allows public access)                                            *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Default policy for all controllers and actions, unless overridden.       *
+   * (`true` allows public access)                                            *
+   *                                                                          *
+   ***************************************************************************/
 
   "*": ["auth"],
   // '*': true,
@@ -24,7 +23,8 @@ module.exports.policies = {
     login: true,
     create: true,
     read: true,
+    update: true,
+    changePassword: true,
     googleLogin: true,
   },
-
 };
