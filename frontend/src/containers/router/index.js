@@ -16,6 +16,7 @@ import TaskDetail from '../../components/task-detail';
 import WikiSection from '../../components/wikiSection';
 import UserManagement from '../../components/userManagement';
 import EnviromentSection from '../../components/enviromentSection';
+import NewTask from '../../components/newTask';
 
 // Local
 import useHistorialActions from '../../store/historial/actions';
@@ -49,6 +50,7 @@ function Router() {
                 <Route path='/task-detail/:id' component={TaskDetail} />
                 <Route path='/wikiSection' component={WikiSection} />
                 <Route path='/userManagement' component={UserManagement} />
+                <Route path='/newTask' component={NewTask} />                
                 <Route
                    path='/enviromentSection'
                    component={EnviromentSection}
