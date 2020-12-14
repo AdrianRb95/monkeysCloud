@@ -32,8 +32,10 @@ const NewTask = () =>{
                     <div className="input-divider">                        
                         <input type="text" className="form-control" placeholder="Summary" name="summary"/>                                                                      
                     </div>
-                    <div className="input-divider">                        
-                        <input type="text" className="form-control" placeholder="Components" name="components"/>                                                                      
+                    <div className="input-divider">                                                
+                        <select className="form-control" name="components">
+                            <option>Components</option>
+                        </select>                                                                    
                     </div>
                     <div className="input-divider">                        
                         <input type="text" className="form-control" placeholder="Attachment" name="summary"/>                                                                      
