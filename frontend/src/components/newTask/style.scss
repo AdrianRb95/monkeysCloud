@@ -70,7 +70,9 @@ hr{
 }
 
 .actions{
-    display: flex;    
+    display: flex;
+    padding-left: 10px;
+    margin-top: 1em;
 }
 
 .span{
@@ -107,4 +109,40 @@ hr{
 .cancel:hover{
     background-color:#15225a;    
     color: #fff;
+}
+
+.upload-container{
+    width: 100%;
+    display: block;
+    padding: 10px;    
+}
+
+.dropzone{
+    margin: auto;
+    width: 100%;
+    font-weight: 300;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    border: dashed 1px #aeafb1;
+    padding: 1em;
+}
+
+.uploaded-files{
+    margin: 2px auto;
+    padding: 6px;
+    font-weight: 300;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    color: #aeafb1;
+    
+}
+
+.lb-description{
+    font-size: 14px;
+    line-height: 20px; 
+    font-weight: 300;
+    color: #aeafb1;
+    padding-bottom: 10px;
 }
