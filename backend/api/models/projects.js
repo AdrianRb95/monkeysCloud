@@ -36,7 +36,7 @@ module.exports = {
         //New fields
         company: {
             model: 'company',
-            unique: true,
+            //unique: true,
             required: true
         },
         enviromentsP: {
@@ -44,6 +44,10 @@ module.exports = {
         },
         agency: { //one to many relationship one agency can have multiple projects
             model: 'agency'
+        },
+        createdby:{
+            model: 'user',
+            required: true
         }
     }
 }

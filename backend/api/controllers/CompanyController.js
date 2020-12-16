@@ -6,14 +6,15 @@
  */
 
 module.exports = {
-
     create: async function(req, res) {
-        if (req.body == null) {
-            return res.send('null body')
-        } else {
-            const companyCreated = await company.create(req.body).fetch();
-            return res.json(companyCreated);
-        }
+        try{
+            const newCompany = await company.create(req.body).fetch();
+            const token = await sails.helpers.generateAuthToken(newCompany.id);
+            return res.json({company: newCompany, token});
+        }catch(error){
+            res.serverError(error);
+            console.log(error);
+        }        
     },
     read: async function(req, res) {
         if (req.params.id != undefined) {

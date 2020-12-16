@@ -47,6 +47,16 @@ module.exports = {
     }
   },
 
+  createdProjects: async function(req, res){
+    try{
+      const projects = await user.findOne({id: (req.params.id)}).populate('createdProject');
+      return res.json(projects);
+    }catch(error){
+      res.serverError("Invalid Data");
+      console.log(error);
+    }
+  },
+
   me: async function (req, res) {
     try {
       const User = await user.findOne(req.user);
