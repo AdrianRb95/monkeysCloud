@@ -10,11 +10,25 @@
   min-height: 100vh;
 }
 
-.main-content {
+.main-content  {
   min-height: 100%;
   min-width: 100%;
   display: grid;
   grid-template-columns: 80px 1fr;
+  grid-template-rows: 80px 1fr;
+  grid-template-areas:
+    "sidebar navbar"
+    "sidebar app";
+  @include md {
+    grid-template-rows: auto 1fr;
+  }
+}
+//modificado para ajustar el sidebar exp
+.main-content-exp  {
+  min-height: 100%;
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 216px 1fr;
   grid-template-rows: 80px 1fr;
   grid-template-areas:
     "sidebar navbar"
@@ -324,3 +338,5 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
