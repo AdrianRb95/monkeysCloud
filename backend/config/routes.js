@@ -34,18 +34,18 @@ module.exports.routes = {
   'DELETE /Language/Delete': {controller: "Languages", action: "delete"},
 
   //ProjectsController Routes
-  'POST /Project/Create': {controller: "Projects", action: "create"},
-  'GET /Project/Read/:id': {controller: "Projects", action: "read"},
+  'POST /Project/Create': {controller: "Projects", action: "create"},  
+  'GET /Project/Read': {controller: "Projects", action: "read"},  
   'PATCH /Project/Update': {controller: "Projects", action: "update"},
   'DELETE /Project/Delete': {controller: "Projects", action: "delete"},
 
   //RecoveryCodeController Routes
-  'POST /Project/Create': {controller: "RecoveryCode", action: "create"},
-  'GET /Project/Read/:id': {controller: "RecoveryCode", action: "read"},
-  'PATCH /Project/Update': {controller: "RecoveryCode", action: "update"},
-  'DELETE /Project/Delete': {controller: "RecoveryCode", action: "delete"}, 
-  'POST /Project/VerifyCode': {controller: "RecoveryCode", action: "verifyCode"},
-  'POST /Project/SendCode': {controller: "RecoveryCode", action: "sendCode"},
+  'POST /RecoveryCode/Create': {controller: "RecoveryCode", action: "create"},
+  'GET /RecoveryCode/Read/:id': {controller: "RecoveryCode", action: "read"},
+  'PATCH /RecoveryCode/Update': {controller: "RecoveryCode", action: "update"},
+  'DELETE /RecoveryCode/Delete': {controller: "RecoveryCode", action: "delete"}, 
+  'POST /RecoveryCode/VerifyCode': {controller: "RecoveryCode", action: "verifyCode"},
+  'POST /RecoveryCode/SendCode': {controller: "RecoveryCode", action: "sendCode"},
 
   //SprintsController Routes 
   'POST /Sprint/Create': {controller: "Sprints", action: "create"},
@@ -56,6 +56,7 @@ module.exports.routes = {
   //TasksController Routes
   'POST /Task/Create': {controller: "Tasks", action: "create"},
   'GET /Task/Read/:id': {controller: "Tasks", action: "read"},
+  'GET /Task/ReadStates': {controller: "Tasks", action: "readStates"},  
   'PATCH /Task/Update': {controller: "Tasks", action: "update"},
   'DELETE /Task/Delete': {controller: "Tasks", action: "delete"},
 
@@ -66,6 +67,7 @@ module.exports.routes = {
   'POST /User/Create': {controller: "User", action: "create"},
   'GET /User/Read/:id': {controller: "User", action: "read"},
   'GET /user/me': 'UserController.me',
+  'GET /User/CreatedProjects/:id': {controller: "User", action: "createdProjects"},
   'PATCH /User/Update': {controller: "User", action: "update"},
   'DELETE /User/Delete': {controller: "User", action: "delete"},
   'POST /User/LogIn': {controller: "User", action: "login"},

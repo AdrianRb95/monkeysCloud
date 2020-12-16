@@ -25,8 +25,22 @@ module.exports.policies = {
     create: true,
     read: true,
     googleLogin: true,
+    createdProjects: true
   },
   TasksController: {
+    create: true,
+    read: true,
+    readStates: true,
+  },
+  StateController: {
+    create: true,
+    read: true,
+  },
+  ProjectsController: {
+    create: true,
+    read: true,    
+  },
+  CompanyController: {
     create: true,
     read: true,
   }

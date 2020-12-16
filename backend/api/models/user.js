@@ -164,6 +164,10 @@ module.exports = {
       columnType: "varchar(20)",
     },
 
+    createdProject: {
+      collection: 'projects',
+      via: 'createdby'
+    }
     //-----------------End of New fields--------------------
   },
 
