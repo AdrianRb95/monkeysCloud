@@ -2,7 +2,7 @@ import Axios from 'axios';
 import React, { useEffect } from 'react';
 import Router from './containers/router';
 function App() {
-    var axios = require('axios');
+    /* var axios = require('axios');
 
     var config = {
       method: 'get',
@@ -18,7 +18,7 @@ function App() {
     })
     .catch(function (error) {
       console.log(error);
-    });
+    }); */
 
   return <Router />;
 }
