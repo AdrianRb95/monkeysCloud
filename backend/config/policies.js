@@ -9,13 +9,12 @@
  */
 
 module.exports.policies = {
-
   /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions, unless overridden.       *
-  * (`true` allows public access)                                            *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Default policy for all controllers and actions, unless overridden.       *
+   * (`true` allows public access)                                            *
+   *                                                                          *
+   ***************************************************************************/
 
   "*": ["auth"],
   // '*': true,
@@ -24,25 +23,8 @@ module.exports.policies = {
     login: true,
     create: true,
     read: true,
+    update: true,
+    changePassword: true,
     googleLogin: true,
-    createdProjects: true
   },
-  TasksController: {
-    create: true,
-    read: true,
-    readStates: true,
-  },
-  StateController: {
-    create: true,
-    read: true,
-  },
-  ProjectsController: {
-    create: true,
-    read: true,    
-  },
-  CompanyController: {
-    create: true,
-    read: true,
-  }
-
 };

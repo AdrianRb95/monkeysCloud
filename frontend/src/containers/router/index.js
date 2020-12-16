@@ -7,6 +7,7 @@ import DevEnviroment from '../../pages/devEnviroment';
 import Login from '../../pages/login';
 import Manage from '../../pages/manage';
 import Subscription from '../../pages/subscription';
+import UserDetail from '../../pages/userDetail';
 
 //components
 import Historial from '../../components/historial';
@@ -21,6 +22,7 @@ import NewTask from '../../components/newTask';
 // Local
 import useHistorialActions from '../../store/historial/actions';
 import useAuth from '../../store/auth/actions';
+import useSidebarActions from '../.././store/sidebar/actions';
 
 function Router() {
   const {
@@ -28,6 +30,7 @@ function Router() {
   } = useAuth();
 
   const { state: historialState } = useHistorialActions();
+  const { state: sidebarState, } = useSidebarActions(); //tomado del index de sidebar
   return (
     <BrowserRouter>
       <div className='container'>
@@ -37,7 +40,14 @@ function Router() {
             <Redirect to='/' />
           </Switch>
         ) : (
-          <div className='main-content'>
+          <div
+            //código tomado del index de sidebar
+          className={
+        sidebarState.isSidebarExpanded
+          ? 'main-content-exp'
+          : 'main-content'
+      }
+          >
             <Navbar />
             <Sidebar />
             <div className='app'>
@@ -49,12 +59,13 @@ function Router() {
                 <Route path='/dev-enviroment' component={DevEnviroment} />
                 <Route path='/task-detail/:id' component={TaskDetail} />
                 <Route path='/wikiSection' component={WikiSection} />
+                <Route exact path='/user/details' component={UserDetail} />
                 <Route path='/userManagement' component={UserManagement} />
                 <Route path='/newTask' component={NewTask} />                
                 <Route
-                   path='/enviromentSection'
-                   component={EnviromentSection}
-                 />
+                  path='/enviromentSection'
+                  component={EnviromentSection}
+                />
               </Switch>
             </div>
           </div>

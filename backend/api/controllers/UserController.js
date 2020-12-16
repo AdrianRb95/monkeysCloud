@@ -37,7 +37,10 @@ module.exports = {
 
   read: async function (req, res) {
     if (req.params.id) {
-      const data = await user.findOne(req.params.id);
+      const data = await user.findOne({
+        where: { id: req.params.id },
+        select: ["location", "fullname", "bio", "department", "jobTitle"],
+      });
       res.json({ user: data });
     } else {
       res.notFound();
@@ -65,10 +68,24 @@ module.exports = {
 
   update: async function (req, res) {
     try {
-      const data = await user.update(req.user).set(req.body).fetch();
+      const data = await user.update(req.params.id).set(req.body).fetch();
       res.send({ user: data });
     } catch (error) {
+      console.log(error);
       res.badRequest();
+    }
+  },
+
+  changePassword: async function (req, res) {
+    try {
+      const loggedUser = await user.findOne(req.params.id).decrypt();
+      if (loggedUser.password !== req.body.currentPassword) {
+        return res.notFound();
+      }
+      await user.update(req.params.id).set({ password: req.body.password });
+      res.ok();
+    } catch (error) {
+      res.serverError();
     }
   },
 

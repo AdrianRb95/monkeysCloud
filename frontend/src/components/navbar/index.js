@@ -1,5 +1,6 @@
 import React, { memo, useState } from "react";
 import { FaBell, FaSearch } from "react-icons/fa";
+import { useHistory, Link } from 'react-router-dom'
 // Local
 import "./style.scss";
 
@@ -21,10 +22,12 @@ function Navbar() {
 
   return (
     <nav className="monkeys-nav">
-      <div className="logo-container">
+      <Link to="/" className="logo-container">
+
         <span className="logo-partone">MONKEY'S</span>
         <span className="logo-parttwo">CLOUD</span>
-      </div>
+
+      </Link>
       {/*/!*<SearchFilter />*!/*/}
       <div className="searchContainer">
         {showSearchBox ? <SearchFilter /> : null}

@@ -13,7 +13,7 @@
   background: white;
 }
 
-.monkeys-sidebar-expanded {
+.monkeys-sidebar-expanded  {
   min-height: 100vh;
   top: 0;
   width: 216px;
@@ -22,6 +22,7 @@
   flex-direction: column;
   grid-area: sidebar;
   background: white;
+  z-index: 0;
 }
 
 .monkeys-menu-icon {

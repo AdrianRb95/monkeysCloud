@@ -11,33 +11,33 @@ const handleSubmit = event => {
 
 const NewTask = () =>{
     const [projects, setProjects] = useState([]);
-    
-    /* var axios = require('axios');
+
+    var axios = require('axios');
 
     var config = {
       method: 'get',
       url: 'http://localhost:1337/User/CreatedProjects/1',
       headers: { 
-        //'Cookie': 'sails.sid=s%3AwcCdJfU1-ajehetKxXh_YCAvnTVq-R7t.0zXjXyaMzSoDDIDeQe9s7ZWjzml0kB7SXQsFnXo%2BO0s'
+        'Cookie': 'sails.sid=s%3AwcCdJfU1-ajehetKxXh_YCAvnTVq-R7t.0zXjXyaMzSoDDIDeQe9s7ZWjzml0kB7SXQsFnXo%2BO0s'
       }
     };
 
     axios(config)
     .then( res => {
         const DBprojects = JSON.stringify(res.data);        
-        //console.log('Created projects by user', DBprojects);
+        console.log('Created projects by user', DBprojects);
         setProjects(DBprojects);
     })
     .catch(function (error) {
       console.log(error);
-    }); */
+    });
 
     const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
     const files = acceptedFiles.map(file => (
         <li key={file.path}>
         {file.path} - {file.size} bytes
         </li>
-    ));    
+    ));
 
     return(
         <div className="main-container">

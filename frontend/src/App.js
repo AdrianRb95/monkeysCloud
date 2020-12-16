@@ -1,18 +1,19 @@
 import Axios from 'axios';
 import React, { useEffect } from 'react';
 import Router from './containers/router';
-function App() {
-    /* var axios = require('axios');
-
-    var config = {
-      method: 'get',
-      url: 'http://localhost:1337/User/Read/1',
-      headers: { 
-        'Cookie': 'sails.sid=s%3AwcCdJfU1-ajehetKxXh_YCAvnTVq-R7t.0zXjXyaMzSoDDIDeQe9s7ZWjzml0kB7SXQsFnXo%2BO0s'
-      }
-    };
     
-    axios(config)
+function App() {
+  /*   var axios = require('axios');
+
+  var config = {
+    method: 'get',
+    url: 'http://localhost:1337/User/Read',
+    headers: {
+      Cookie:
+        'sails.sid=s%3AwcCdJfU1-ajehetKxXh_YCAvnTVq-R7t.0zXjXyaMzSoDDIDeQe9s7ZWjzml0kB7SXQsFnXo%2BO0s',
+    },
+  };
+  axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
     })
@@ -20,6 +21,6 @@ function App() {
       console.log(error);
     }); */
 
-  return <Router />;
+  return <Router />;
 }
-export default App;
+export default App;
