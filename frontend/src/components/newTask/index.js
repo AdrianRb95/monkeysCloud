@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
 import {useDropzone} from 'react-dropzone'
@@ -10,6 +10,8 @@ const handleSubmit = event => {
 }
 
 const NewTask = () =>{
+    const [projects, setProjects] = useState([]);
+
     var axios = require('axios');
 
     var config = {
@@ -22,8 +24,9 @@ const NewTask = () =>{
 
     axios(config)
     .then( res => {
-        const projects = JSON.stringify(res.data);        
-        console.log('Created projects by user', projects);
+        const DBprojects = JSON.stringify(res.data);        
+        console.log('Created projects by user', DBprojects);
+        setProjects(DBprojects);
     })
     .catch(function (error) {
       console.log(error);
@@ -42,12 +45,8 @@ const NewTask = () =>{
             <form onSubmit={handleSubmit}>
                 <div className="form-container">
                     <div className="input-divider">                        
-                        <select className="form-control" name="project">
-                        {
-                            Object.keys(projects).map((project) => {
-                                <option value={project.name}>{project.name}</option>
-                            })
-                        }            
+                        <select className="form-control" name="project">                                                    
+                            <option>Projects</option>                                 
                         </select>                                                                       
                     </div>
                     <div className="input-divider">                                                
