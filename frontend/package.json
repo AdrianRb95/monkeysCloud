@@ -20,6 +20,7 @@
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
+    "react-dropzone": "^11.2.4",
     "react-google-login": "^5.1.21",
     "react-icons": "^3.11.0",
     "react-modal": "^3.11.2",

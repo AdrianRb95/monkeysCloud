@@ -1,11 +1,11 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./style.scss";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
-function UserSettings() {
+const UserSettings = forwardRef((props, ref) => {
   return (
-    <nav className="menu">
-      <ul className="monkeys-menu-container">
+    <nav className="menu" ref={ref} style={{zIndex: 4}}>
+      <ul className="monkeys-menu-container" >
         <li className="monkeys-p-2 pointer">Jira</li>
         <li className="monkeys-p-2 pointer">Personal Settings</li>
         <li className="monkeys-p-2 pointer">Profile</li>
@@ -22,6 +22,6 @@ function UserSettings() {
       </ul>
     </nav>
   );
-}
+});
 
 export default UserSettings;
