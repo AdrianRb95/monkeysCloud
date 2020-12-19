@@ -1,68 +1,227 @@
-version: '3.7'
-services: 
-  mysql:
-    image: mysql:5.7.32
-    ports: 
-      - 3306:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=admin
-      - MYSQL_DATABASE=monkeysapp
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=admin
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks: 
-      - share-network
+version: "3.7"
+services:
+
+  #Elasticsearch container
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
-    ports:
-      - 9300:9300
-      - 9200:9200
+    container_name: elasticsearch
+    hostname: elasticsearch
+    image: "docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_VERSION}"
     environment:
-      - http.cors.enabled=true
-      - http.cors.allow-origin=*
-      - http.cors.allow-methods=OPTIONS,HEAD,GET,POST,PUT,DELETE
-      - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+      - http.host=0.0.0.0
       - transport.host=127.0.0.1
-      - cluster.name=docker-cluster
-      - discovery.type=single-node
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms${ES_JVM_HEAP} -Xmx${ES_JVM_HEAP}"
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+      - xpack.security.enabled=true
+      - xpack.security.authc.api_key.enabled=true
+      - xpack.ml.enabled=false
+    mem_limit: ${ES_MEM_LIMIT}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
-    networks:
-      - share-network
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.10.0
-    ports:
-      - 5601:5601
-    networks:
-      - share-network
-    depends_on:
-      - elasticsearch
-  logstash:
-    build: 
-      dockerfile: ${PWD}/Dockerfile
-      context: ${PWD}/
+      - ./config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml
+      - esdata:/usr/share/elasticsearch/data
+    ports: ['9200:9200']
+    healthcheck:
+      test: ["CMD", "curl","-s" ,"-f", "http://localhost:9200/_cat/health"]
+    networks: ['stack']
+
+  #Enterprisesearch container
+  enterprisesearch:
+    container_name: enterprisesearch
+    hostname: enterprisesearch
+    image: "docker.elastic.co/enterprise-search/enterprise-search:7.9.3"
     environment:
-      - LOGSTASH_JDBC_URL=admin:admin://mysql:3306/monkeysapp?useSSL=false
-      - LOGSTASH_JDBC_DRIVER=com.mysql.cj.jdbc.Driver
-      - LOGSTASH_JDBC_DRIVER_JAR_LOCATION=/usr/share/logstash/logstash-core/lib/jars/mysql-connector-java.jar
-      - LOGSTASH_JDBC_USERNAME=admin
-      - LOGSTASH_JDBC_PASSWORD=admin
-      - LOGSTASH_ELASTICSEARCH_HOST=http://elasticsearch:9200
-    volumes: 
-      - ./logstash/pipeline:/usr/share/logstash/filter/ 
-    ports:
-      - 9600:9600
-      - 5044:5044
-    networks:
-      - share-network
+    - "ent_search.auth.source=standard"
+    - "elasticsearch.username=elastic"
+    - "elasticsearch.password=$ELASTIC_PASSWORD"
+    - "elasticsearch.host=http://elasticsearch:9200"
+    - "allow_es_settings_modification=true"
+    - "secret_management.encryption_keys=[XYZ]"
+    - "ENT_SEARCH_DEFAULT_PASSWORD=$ELASTIC_PASSWORD"
+    ports: ['3002:3002']
+    networks: ['stack']
+    links: ['elasticsearch']
+    depends_on: ['elasticsearch']
+
+  #Kibana container
+  kibana:
+    container_name: kibana
+    hostname: kibana
+    image: "docker.elastic.co/kibana/kibana:${ELASTIC_VERSION}"
+    volumes:
+      - ./config/kibana/kibana.yml:/usr/share/kibana/kibana.yml
+    ports: ['5601:5601']
+    networks: ['stack']
     depends_on:
-      - elasticsearch
-      - kibana
-      - mysql
+      elasticsearch: { condition: service_healthy }
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-s", "-f", "http://localhost:5601/"]
+      retries: 6
+
+  #Auditbeat container
+  auditbeat:
+    container_name: auditbeat
+    hostname: auditbeat
+    user: root #To read the docker socket
+    image: "docker.elastic.co/beats/auditbeat:${ELASTIC_VERSION}"
+    volumes:
+      #Mount the Auditbeat configuration so users can make edits.
+      - ./config/beats/auditbeat/auditbeat.yml:/usr/share/auditbeat/auditbeat.yml
+      #Allows us to report on docker from the hosts information.
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      elasticsearch: { condition: service_healthy }
+    command: auditbeat -e -strict.perms=false
+    pid: "host" # Set the required permissions with pid and cap_add for Auditbeat
+    cap_add: ['AUDIT_CONTROL', 'AUDIT_READ']
+    networks: ['stack']
+    restart: on-failure
+
+  #Heartbeat container
+  heartbeat:
+    container_name: heartbeat
+    hostname: heartbeat
+    user: root #To read the docker socket
+    image: "docker.elastic.co/beats/heartbeat:${ELASTIC_VERSION}"
+    volumes:
+      #Mount the Heartbeat configuration so users can make edits.
+      - ./config/beats/heartbeat/heartbeat.yml:/usr/share/heartbeat/heartbeat.yml
+      #Allows us to report on docker from the hosts information.
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      elasticsearch: { condition: service_healthy }
+    command: heartbeat -e -strict.perms=false
+    networks: ['stack']
+    restart: on-failure
+
+  #Filebeat container
+  filebeat:
+    container_name: filebeat
+    hostname: filebeat
+    user: root #To read the docker socket
+    image: "docker.elastic.co/beats/filebeat:${ELASTIC_VERSION}"
+    volumes:
+      #Mount the Filebeat configuration so users can make edits.
+      - ./config/beats/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      #Mount the prospectors directory. Users can in turn add propspectors to this directory and they will be dynamically loaded.
+      - ./config/beats/filebeat/prospectors.d/:/usr/share/filebeat/prospectors.d/
+      #Mount the nginx logs into the Filebeat container so we can access and index them using the Filebeat nginx module.
+      - ./logs/nginx/:/var/log/nginx/
+      #Mount the MySQL logs into the Filebeat container so we can access and and index them using the Filebeat MySQL module.
+      - ./logs/mysql/:/var/log/mysql/
+      #Mount the hosts system log directory. This represents the logs of the VM hosting docker. Consumed by the Filebeat system module.
+      - /private/var/log/:/var/log/host/:ro
+      #Mount the Docker logs for indexing by the custom prospector ./config/filebeat/prospectors.d.
+      - /var/lib/docker/containers:/hostfs/var/lib/docker/containers
+      #Named volume fsdata. This is used to persist the registry file between restarts, so to avoid data duplication.
+      - filebeatdata:/usr/share/filebeat/data/
+      #Allows us to report on docker from the hosts information.
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks: ['stack']
+    command: filebeat -e -strict.perms=false
+    restart: on-failure
+    depends_on:
+      elasticsearch: { condition: service_healthy }
+
+  #Metricbeat container
+  metricbeat:
+    container_name: metricbeat
+    hostname: metricbeat
+    user: root #To read the docker socket
+    image: docker.elastic.co/beats/metricbeat:${ELASTIC_VERSION}
+    volumes:
+      #Mount the metricbeat configuration so users can make edits.
+      - ./config/beats/metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+      #Mount the modules.d directory into the container. This allows user to potentially make changes to the modules and they will be dynamically loaded.
+      - ./config/beats/metricbeat/modules.d/:/usr/share/metricbeat/modules.d/
+      #The commented sections below enable Metricbeat to monitor the Docker host rather than the Metricbeat container. These are used by the system module.
+      - /proc:/hostfs/proc:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      #Allows us to report on docker from the hosts information.
+      - /var/run/docker.sock:/var/run/docker.sock
+      #We mount the host filesystem so we can report on disk usage with the system module.
+      - /:/hostfs:ro
+    command: metricbeat -e -system.hostfs=/hostfs -strict.perms=false
+    networks: ['stack']
+    restart: on-failure
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+    depends_on:
+      elasticsearch:  { condition: service_healthy }
+
+  #Packetbeat container
+  packetbeat:
+    container_name: packetbeat
+    hostname: packetbeat
+    user: root #To read the docker socket
+    image: "docker.elastic.co/beats/packetbeat:${ELASTIC_VERSION}"
+    volumes:
+      #Mount the packetbeat configuration so users can make edits.
+      - ./config/beats/packetbeat/packetbeat.yml:/usr/share/packetbeat/packetbeat.yml
+      #Allows us to report on docker from the hosts information.
+      - /var/run/docker.sock:/var/run/docker.sock
+    # Packetbeat needs some elevated privileges to capture network traffic. We'll grant them with POSIX capabilities.
+    cap_add: ['NET_RAW', 'NET_ADMIN']
+    # Use "host mode" networking to allow Packetbeat to capture traffic from the real network interface on the host,
+    # rather than being isolated to the container's virtual interface.
+    network_mode: host
+    restart: on-failure
+    command: packetbeat -e -strict.perms=false
+    depends_on:
+      elasticsearch:  { condition: service_healthy }
+
+  #nginx container
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    build: ${PWD}/config/nginx
+    networks: ['stack']
+    #Expose port 80 to allow users to hit content and generate data for filebeat and packetbeat.
+    ports: ['80:80']
+    command: nginx -g 'daemon off;'
+    volumes:
+      #Logs are mounted to a relative path. These are also accessed by Filebeat and consumed by the Nginx module.
+      - ./logs/nginx/:/var/log/nginx/
+
+  #MySQL container
+  mysql:
+    container_name: mysql
+    hostname: mysql
+    build: ${PWD}/config/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+    networks: ['stack']
+    #Expose port 3306 to allow users to connect and perform operations. These will be picked up by Packetbeat, Filebeat and Metricbeat.
+    ports: ['3306:3306']
+    volumes:
+      #Use named volume so mysql data is persisted across restart.
+      - mysqldata:/var/lib/mysql/
+      #Logs are mounted to a relative path. These are also accessed by Filebeat and consumed by the MySQL module.
+      - ./logs/mysql:/var/log/mysql/
+
+  #Configure Stack container. This short lived container configures the stack once Kibana and Elasticsearch are available.
+  #More specifically, using a script it sets a default index pattern, loads templates and pipelines.
+  configure_stack:
+    container_name: configure_stack
+    image: docker.elastic.co/beats/metricbeat:${ELASTIC_VERSION}
+    volumes: ['./init/configure-stack.sh:/usr/local/bin/configure-stack.sh:ro','./init/pipelines/:/usr/local/bin/pipelines/','./init/templates/:/usr/local/bin/templates/']
+    command: ['/bin/bash', '-c', 'cat /usr/local/bin/configure-stack.sh | tr -d "\r" | bash']
+    networks: ['stack']
+    environment: ['ELASTIC_VERSION=${ELASTIC_VERSION}']
+    depends_on: ['elasticsearch','kibana']
+
+
+
 volumes:
-  elasticsearch_data:
-  mysql_data:
-networks:
-  share-network:
+  mysqldata:
+    driver: local
+  esdata:
+    driver: local
+  filebeatdata:
+    driver: local
+networks: {stack: {}}

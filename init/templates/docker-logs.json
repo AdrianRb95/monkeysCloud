@@ -1,0 +1,8 @@
+{
+  "template": "docker-logs-*",
+  "settings": {
+    "index": {
+      "number_of_shards": "1"
+    }
+  }
+}
