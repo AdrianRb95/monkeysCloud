@@ -148,9 +148,27 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     cors: {
-      // allowOrigins: [
-      //   'https://example.com',
-      // ]
+      allRoutes: true,
+      allowOrigins: ["webapp:3000", "http://localhost:3000", "http://webapp:3000", "http://127.0.0.1:3000"],
+      allowCredentials: false,
+      allowRequestHeaders: [
+        'X-Powered-By', 
+        'Content-Type', 
+        'Accept', 
+        'Origin',
+        'Accept-Encoding',
+        'Accept-Language',
+        'Connection',
+        'Host',
+        'Origin',
+        'Referer',
+        'Sec-Fetch-Dest',
+        'Sec-Fetch-Mode',
+        'Sec-Fetch-Site',
+        'User-Agent',
+        'Pragma',
+        'Cache-Control',
+      ]
     },
 
   },

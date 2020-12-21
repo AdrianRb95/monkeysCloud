@@ -21,13 +21,15 @@ WORKDIR /usr/src/app
 # - COPY ./backend .
 
 RUN npm install sails -g
+RUN npm install nodemon -g
 RUN npm install
 
 COPY . ./
 # - then it needs to start container with command 'tini -- node ./bin/www'
-CMD ["forever", "start" ,"./app.js","--prod"]
-CMD ["node","./app.js","--prod"]
-CMD ["node","./app.js"]
+# CMD ["forever", "start" ,"./app.js","--prod"]
+# CMD ["node","./app.js","--prod"]
+CMD ["sails", "lift", "--drop"]
+CMD ["nodemon","./app.js"]
 
 
 
