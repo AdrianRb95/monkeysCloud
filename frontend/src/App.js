@@ -20,12 +20,6 @@ function App() {
     .catch(function (error) {
       console.log(error);
     }); */
-  useEffect(() => {
-    axios
-      .get('/user/read/1')
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  }, []);
 
   return <Router />;
 }

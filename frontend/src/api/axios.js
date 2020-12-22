@@ -2,11 +2,6 @@ import Axios from 'axios';
 
 const axios = Axios.create({
   baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true,
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-  },
 });
 
 axios.interceptors.response.use(null, error => {
