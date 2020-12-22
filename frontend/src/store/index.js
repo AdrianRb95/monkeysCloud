@@ -10,6 +10,7 @@ import { UserDetailsStore } from './userDetails/store';
 
 import { SettingsStore } from './settings/store';
 import { TaskStore } from './task/store';
+import { ProjectStore } from './project/store';
 import { SprintStore } from './sprint/store';
 
 const providers = [
@@ -17,6 +18,7 @@ const providers = [
   <SidebarStore.Provider />,
   <OrganizationStore.Provider />,
   <HistorialStore.Provider />,
+  <ProjectStore.Provider />,
   <UserSettingsStore.Provider />,
   <UserDetailsStore.Provider />,
   <SettingsStore.Provider />,

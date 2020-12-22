@@ -11,7 +11,6 @@ import Button from '../../components/form/button';
 import Google from '../../assets/logo/logo-google.png';
 import Monkey from '../../assets/logo/monkey.png';
 import Logo from '../../assets/logo/logo.png';
-
 import useAuth from '../../store/auth/actions';
 
 const initialState = {

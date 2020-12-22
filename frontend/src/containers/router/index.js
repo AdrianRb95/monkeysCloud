@@ -23,6 +23,7 @@ import NewTask from '../../components/newTask';
 import useHistorialActions from '../../store/historial/actions';
 import useAuth from '../../store/auth/actions';
 import useSidebarActions from '../.././store/sidebar/actions';
+import CreateProject from '../../pages/createProject';
 
 function Router() {
   const {
@@ -30,7 +31,7 @@ function Router() {
   } = useAuth();
 
   const { state: historialState } = useHistorialActions();
-  const { state: sidebarState, } = useSidebarActions(); //tomado del index de sidebar
+  const { state: sidebarState } = useSidebarActions(); //tomado del index de sidebar
   return (
     <BrowserRouter>
       <div className='container'>
@@ -42,11 +43,11 @@ function Router() {
         ) : (
           <div
             //código tomado del index de sidebar
-          className={
-        sidebarState.isSidebarExpanded
-          ? 'main-content-exp'
-          : 'main-content'
-      }
+            className={
+              sidebarState.isSidebarExpanded
+                ? 'main-content-exp'
+                : 'main-content'
+            }
           >
             <Navbar />
             <Sidebar />
@@ -56,6 +57,7 @@ function Router() {
                 <Route exact path='/' component={Manage} />
                 <Route path='/subscription' component={Subscription} />
                 <Route path='/all-enviroment' component={AllEnviroment} />
+                <Route path='/project/new' exact component={CreateProject} />
                 <Route path='/dev-enviroment' component={DevEnviroment} />
                 <Route path='/task-detail/:id' component={TaskDetail} />
                 <Route path='/wikiSection' component={WikiSection} />

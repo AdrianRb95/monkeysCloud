@@ -1,0 +1,39 @@
+@import '../../sass/main.scss';
+
+.create-project {
+  .error-message {
+    font-size: 13px;
+  }
+  h2 {
+    margin-bottom: 20px;
+  }
+  &__main {
+    margin: auto;
+    max-width: 800px;
+    width: 100%;
+  }
+  .form-group {
+    margin: 15px 0;
+  }
+  input {
+    padding-left: 5px;
+    background: #fff;
+    height: 30px;
+    font-size: 14px;
+    &:focus {
+      outline-width: 0;
+      border: 1px solid $Brandeisblue-color;
+    }
+  }
+  &__button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  button {
+    width: 90px;
+    height: 30px;
+    font-size: 14px;
+    margin: 8px 0;
+    justify-self: flex-end;
+  }
+}
