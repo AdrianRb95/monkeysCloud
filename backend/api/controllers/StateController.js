@@ -6,14 +6,16 @@
  */
 
 module.exports = {
-  
-    create: async function(req, res){
-        if(req.body == null)
-            return res.send('null body');
-        else{
-            const createdState = await state.create(req.body).fetch();
-            return res.json(createdState);
+    create: async function (req, res) {
+        try{
+            const newState = await state.create(req.body).fetch();
+            const token = await sails.helpers.generateAuthToken(newState.id);
+            return res.json({state: newState, token})
         }
+        catch(error){
+            res.serverError("Invalid Data");
+            console.log(error);
+        }        
     },
     read: async function(req, res){
         if(req.params.id != undefined){

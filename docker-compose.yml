@@ -1,0 +1,149 @@
+version: "3.7"
+
+services:
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis:5.0.5
+    volumes:
+      - type: volume
+        source: redis
+        target: /data
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    networks:
+      - local
+
+  # #MySQL container
+  # mysql:
+  #   container_name: mysql
+  #   hostname: mysql
+  #   build: ${PWD}/config/mysql
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   environment:
+  #     - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+  #     - "MYSQL_DATABASE=${MYSQL_DB}"
+  #     - "MYSQL_ROOT_HOST='%'"
+  #   networks:
+  #     - local
+  #   #Expose port 3306 to allow users to connect and perform operations. These will be picked up by Packetbeat, Filebeat and Metricbeat.
+  #   ports: ['3306:3306']
+  #   volumes:
+  #     #Use named volume so mysql data is persisted across restart.
+  #     - ./mysqldata:/var/lib/mysql
+  #     #Logs are mounted to a relative path. These are also accessed by Filebeat and consumed by the MySQL module.
+  #     - ./logs/mysql:/var/log/mysql/
+
+  # #Configure Stack container. This short lived container configures the stack once Kibana and Elasticsearch are available.
+  # #More specifically, using a script it sets a default index pattern, loads templates and pipelines.
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: monkeysapp
+    ports:
+      - "3306:3306"
+    networks:
+      - local
+
+  sailsjs:
+    container_name: sailsjs
+    hostname: sailsjs
+    tty: true
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    ports:
+      - "1337:1337"
+      - 9337:9337
+    environment:
+      PORT: 1337
+      DEBUG_PORT: 9337
+      WAIT_HOSTS: mysql:3306,redis:6379
+      NODE_ENV: development
+      MYSQL_URL: mysql://root:123456@localhost:3306/monkeysapp
+    volumes:
+      - ./backend:/usr/src/app
+    networks:
+      - local
+    depends_on:
+      - "mysql"
+      - "redis"
+
+  webapp:
+    container_name: webapp
+    hostname: webapp
+    restart: always
+    stdin_open: true
+    tty: true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./frontend:/app"
+      - "/app/node_modules"
+    environment:
+      REACT_APP_API_URL: http://webapp.monkeys.local
+      # - CHOKIDAR_USEPOLLING=true
+    networks:
+      - local
+    depends_on:
+      - "sailsjs"
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    build: ${PWD}/config/nginx
+    restart: on-failure
+    environment:
+      WAIT_HOSTS: sailsjs:1337,webapp:3000, mysql:3306
+    networks:
+      - local
+    #Expose port 80 to allow users to hit content and generate data for filebeat and packetbeat.
+    ports: ['80:80']
+    command: nginx -g 'daemon off;'
+    volumes:
+      #Logs are mounted to a relative path. These are also accessed by Filebeat and consumed by the Nginx module.
+      - ./logs/nginx/:/var/log/nginx/
+    depends_on:
+      - "sailsjs"
+      - "webapp"
+
+  # elasticsearch:
+  #   image: elasticsearch:7.9.3
+  #   restart: always
+  #   container_name: "elasticsearch"
+  #   tty: true
+  #   environment:
+  #     - node.name=es01
+  #     - cluster.name=docker-cluster
+  #     - bootstrap.memory_lock=true
+  #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   volumes:
+  #     - ./data/esdata:/usr/share/elasticsearch/data
+  #   ports:
+  #     - 9300:9300
+  #   networks:
+  #     - local
+
+networks:
+  local:
+    driver: bridge
+  mysqldata:
+    driver: local
+  esdata:
+    driver: local
+
+volumes:
+  mysql:
+  redis:

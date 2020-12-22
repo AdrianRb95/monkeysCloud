@@ -51,8 +51,8 @@ module.exports.models = {
    *                                                                          *
    ***************************************************************************/
 
-  migrate: "alter",
-
+  migrate: "safe",
+  
   /***************************************************************************
    *                                                                          *
    * Base attributes that are included in all of your models by default.      *

@@ -1,0 +1,148 @@
+.main-container{      
+    width: 65%;
+    margin: 2em auto;
+    display: block;
+    background-color: #f5f4f4;
+    border-radius: 10px;
+    border: solid 1.5px #D3D3D3;  
+}
+
+h3{
+    color: #15225a;   
+    height: 40px;
+    font-family: Rubik;
+    font-size: 30px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+}
+
+.form-container{
+    width: 100%;
+    margin: auto;    
+}
+
+.input-divider{
+    width: 100%;
+    display: flex;
+}
+
+.form-control{
+    border-radius: 3px;
+    border: solid 1.5px #D3D3D3;  
+    transition: 0s;
+    padding: 5px 12px;    
+    font-size: 14px;
+    line-height: 20px;        
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    margin: 0.5em;
+}
+
+.divided-control{
+    border-radius: 3px;
+    border: solid 1.5px #D3D3D3;  
+    transition: 0s;
+    padding: 5px 12px;    
+    font-size: 14px;
+    line-height: 20px;        
+    font-weight: 500;
+    display: block;
+    width: 50%;
+    margin: 0.5em;
+}
+
+.description{
+    color: #83848a;
+    font-weight: 100;              
+    padding: 5px 12px;    
+    font-size: 12px;
+    line-height: 20px;     
+    text-align: center;
+}
+
+hr{
+    margin: 10px auto;
+    width: 85%;
+}
+
+.actions{
+    display: flex;
+    padding-left: 10px;
+    margin-top: 1em;
+}
+
+.span{
+    color: #5a5b5f;
+    font-weight: 500;              
+    padding: 5px 12px;    
+    font-size: 15px;
+    line-height: 12px;       
+    margin-top: 3px;
+}
+
+.submit-button{
+    padding: 5px 15px;
+    background-color:#0759bd;
+    color: #fff;
+    border-radius: 4px;
+    transition: 0s;
+}
+
+.submit-button:hover{
+    background-color:#15225a;    
+    color: #fff;
+}
+
+.cancel{
+    margin-left: 8px;
+    padding: 5px 15px;
+    color:#0759bd;    
+    border-radius: 4px;
+    border: solid 1.5px #D3D3D3;
+    transition: 0s;
+}
+
+.cancel:hover{
+    background-color:#15225a;    
+    color: #fff;
+}
+
+.upload-container{
+    width: 100%;
+    display: block;
+    padding: 10px;    
+}
+
+.dropzone{
+    margin: auto;
+    width: 100%;
+    font-weight: 300;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    border: dashed 1px #aeafb1;
+    padding: 1em;
+}
+
+.uploaded-files{
+    margin: 2px auto;
+    padding: 6px;
+    font-weight: 300;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    color: #aeafb1;
+    
+}
+
+.lb-description{
+    font-size: 14px;
+    line-height: 20px; 
+    font-weight: 300;
+    color: #aeafb1;
+    padding-bottom: 10px;
+}
