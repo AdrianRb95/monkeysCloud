@@ -6,7 +6,7 @@ function UserSettings() {
    
     return(
         <nav className="menu">
-            <div>
+          {/*   <div>
             <a>
             Jira
             </a>
@@ -17,7 +17,7 @@ function UserSettings() {
             <a>
             Personal Settings
             </a>
-            </div>
+            </div> */}
             <div>
             <a>
             Profile
