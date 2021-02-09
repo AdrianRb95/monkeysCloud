@@ -59,6 +59,7 @@ const Project = () => {
         <div className='project-action-buttons'>
           <button>Complete Sprint</button>
           <button>Edit Boards</button>
+          <button onClick={taskCreated}>Create Task</button>
           <button className='ction-button-special'>Share</button>
         </div>
       </div>
